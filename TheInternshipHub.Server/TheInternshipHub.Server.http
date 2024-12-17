@@ -1,0 +1,6 @@
+@TheInternshipHub.Server_HostAddress = http://localhost:5187
+
+GET {{TheInternshipHub.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
