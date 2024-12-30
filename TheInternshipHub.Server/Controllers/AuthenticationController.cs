@@ -53,7 +53,7 @@ namespace TheInternshipHub.Server.Controllers
                 US_LAST_NAME = request.LastName,
                 US_EMAIL = request.Email,
                 US_PHONE_NUMBER = request.PhoneNumber,
-                US_COMPANY_ID = Guid.Empty,
+                US_COMPANY_ID = request.CompanyId,
                 US_PASSWORD = hashedPassword,
                 US_ROLE = request.Role,
                 US_CITY = request.City,

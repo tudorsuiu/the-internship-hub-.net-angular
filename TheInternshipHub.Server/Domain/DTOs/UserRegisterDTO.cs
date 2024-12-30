@@ -1,4 +1,6 @@
-﻿namespace TheInternshipHub.Server.Domain.DTOs
+﻿using TheInternshipHub.Server.Domain.Entities;
+
+namespace TheInternshipHub.Server.Domain.DTOs
 {
     public record UserRegisterDTO
     {
@@ -15,5 +17,7 @@
         public string Role { get; set; }
 
         public string City { get; set; }
+
+        public Guid CompanyId { get; set; }
     }
 }
