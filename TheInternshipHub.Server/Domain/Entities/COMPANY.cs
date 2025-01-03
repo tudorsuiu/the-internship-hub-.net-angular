@@ -15,5 +15,7 @@ namespace TheInternshipHub.Server.Domain.Entities
 
         [MaxLength(100)]
         public string CO_WEBSITE { get; set; }
+
+        public string CO_LOGO_PATH {  get; set; }
     }
 }

@@ -7,7 +7,6 @@ using TheInternshipHub.Server.Domain.SmartService.Domain;
 
 namespace TheInternshipHub.Server.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CompaniesController : ControllerBase
@@ -19,6 +18,7 @@ namespace TheInternshipHub.Server.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<ICollection<COMPANY>>> GetCompanies()
         {
@@ -44,6 +44,7 @@ namespace TheInternshipHub.Server.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<COMPANY>> GetCompanyById(Guid id)
         {
@@ -57,6 +58,7 @@ namespace TheInternshipHub.Server.Controllers
             return Ok(company);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<COMPANY>> CreateCompany([FromBody] COMPANY request)
         {
@@ -65,6 +67,18 @@ namespace TheInternshipHub.Server.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCompanyById", new { id = request.CO_ID }, request);
+        }
+
+        [HttpGet("register")]
+        public async Task<ActionResult<ICollection<COMPANY>>> GetCompaniesForRegister()
+        {
+            var userRole = User.FindFirstValue(ClaimTypes.Role);
+
+            return _context.Companies
+                .Where(c => c.CO_NAME.Contains("Universitatea"))
+                .Order()
+                .ToList();
+
         }
     }
 }
