@@ -23,7 +23,7 @@ namespace TheInternshipHub.Server.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login([FromBody] UserLoginDTO request)
+        public async Task<ActionResult<TokenRoleDTO>> Login([FromBody] UserLoginDTO request)
         {
             var foundUser = _context.Users.FirstOrDefault(u => u.US_EMAIL == request.Email);
             if (foundUser is null || !_passwordHasherService.Verify(foundUser.US_PASSWORD, request.Password))
@@ -31,10 +31,14 @@ namespace TheInternshipHub.Server.Controllers
                 return NotFound("Wrong credentials!");
             }
 
-            var company = _context.Companies.FirstOrDefault(c => c.CO_ID == foundUser.US_COMPANY_ID);
-
             var token = _tokenService.GenerateToken(foundUser);
-            return Ok(token);
+
+            var tokenRoleDto = new TokenRoleDTO
+            {
+                Token = token,
+                Role = foundUser.US_ROLE
+            };
+            return Ok(tokenRoleDto);
         }
 
         [HttpPost("register")]
