@@ -62,6 +62,13 @@ namespace TheInternshipHub.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<COMPANY>> CreateCompany([FromBody] COMPANY request)
         {
+            var userRole = User.FindFirstValue(ClaimTypes.Role);
+
+            if (userRole != "University")
+            {
+                return Unauthorized();
+            }
+
             request.CO_ID = Guid.NewGuid();
             _context.Companies.Add(request);
             await _context.SaveChangesAsync();
@@ -78,7 +85,6 @@ namespace TheInternshipHub.Server.Controllers
                 .Where(c => c.CO_NAME.Contains("Universitatea"))
                 .Order()
                 .ToList();
-
         }
     }
 }
