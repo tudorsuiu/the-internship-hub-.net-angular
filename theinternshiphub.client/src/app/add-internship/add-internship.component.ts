@@ -2,6 +2,8 @@ import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ICompany } from '../dtos/ICompany';
+import { UserService } from '../services/user/user.service';
+import { IUser } from '../dtos/IUser';
 
 @Component({
     selector: 'app-add-internship',
@@ -19,7 +21,18 @@ export class AddInternshipComponent {
     positionsAvailable: number | null = null;
     compensation: number | null = null;
 
-    constructor(private location: Location) {}
+    constructor(private location: Location, private userService: UserService) {}
+
+    ngOnInit() {
+        this.userService.getUserById(localStorage.getItem('token')).subscribe(
+            (response: IUser) => {
+                console.log(response);
+            },
+            (error: any) => {
+                console.log(error.message);
+            }
+        );
+    }
 
     navigateBack() {
         this.location.back();
