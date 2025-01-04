@@ -38,7 +38,8 @@
                     type="text"
                     class="form-control"
                     name="company"
-                    placeholder="Enter company name" />
+                    [value]="this.user?.company?.cO_NAME"
+                    readonly />
             </div>
 
             <div class="col-md-6">
@@ -76,7 +77,7 @@
                     class="form-control"
                     name="compensation"
                     [(ngModel)]="compensation"
-                    placeholder="Enter compensation in lei" />
+                    placeholder="Enter compensation in ron" />
             </div>
         </div>
 

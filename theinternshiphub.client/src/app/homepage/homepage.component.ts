@@ -24,7 +24,6 @@ export class HomepageComponent {
     loadInternships() {
         this.internshipService.getInternships().subscribe(
             (response: IInternship[]) => {
-                console.log(response);
                 this.internships = response;
             },
             (error: any) => {

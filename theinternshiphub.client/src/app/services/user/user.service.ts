@@ -10,7 +10,7 @@ import { endpointAPI } from '../../../config';
 export class UserService {
     constructor(private http: HttpClient) {}
 
-    getUserById(id: string | null): Observable<IUser> {
-        return this.http.get<IUser>(`${endpointAPI}/api/Users/${id}`);
+    getUserById(): Observable<IUser> {
+        return this.http.get<IUser>(`${endpointAPI}/api/Users/logged-user`);
     }
 }
