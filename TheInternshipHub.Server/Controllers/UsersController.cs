@@ -45,6 +45,33 @@ namespace TheInternshipHub.Server.Controllers
             return Ok(result);
         }
 
+        [HttpGet("logged-user")]
+        public async Task<ActionResult<UserDTO>> GetLoggedUser()
+        {
+            var userId = new Guid(User.FindFirstValue("id"));
+            var user = _context.Users.FirstOrDefault(u => u.US_ID == userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = new UserDTO
+            {
+                Id = user.US_ID,
+                FirstName = user.US_FIRST_NAME,
+                LastName = user.US_LAST_NAME,
+                Email = user.US_EMAIL,
+                PhoneNumber = user.US_PHONE_NUMBER,
+                Company = _context.Companies.FirstOrDefault(c => c.CO_ID == user.US_COMPANY_ID),
+                Role = user.US_ROLE,
+                City = user.US_CITY,
+                IsDeleted = user.US_IS_DELETED
+            };
+
+            return Ok(result);
+        }
+
         [HttpPut]
         public async Task<ActionResult<UserDTO>> PutUser(UserDTO request)
         {
