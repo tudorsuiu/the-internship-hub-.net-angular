@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TheInternshipHub.Server.Domain.DTOs;
+using TheInternshipHub.Server.Domain.Entities;
 using TheInternshipHub.Server.Domain.SmartService.Domain;
 
 namespace TheInternshipHub.Server.Controllers
@@ -16,6 +17,32 @@ namespace TheInternshipHub.Server.Controllers
         public UsersController(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserDTO>> GetUserById(Guid id)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.US_ID == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = new UserDTO
+            {
+                Id = user.US_ID,
+                FirstName = user.US_FIRST_NAME,
+                LastName = user.US_LAST_NAME,
+                Email = user.US_EMAIL,
+                PhoneNumber = user.US_PHONE_NUMBER,
+                Company = _context.Companies.FirstOrDefault(c => c.CO_ID == user.US_COMPANY_ID),
+                Role = user.US_ROLE,
+                City = user.US_CITY,
+                IsDeleted = user.US_IS_DELETED
+            };
+
+            return Ok(result);
         }
 
         [HttpPut]
