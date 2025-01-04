@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { endpointAPI } from '../../../config';
 import { Observable } from 'rxjs';
-import { Company } from '../../dtos/Company';
+import { ICompany } from '../../dtos/ICompany';
 
 @Injectable({
     providedIn: 'root',
@@ -10,8 +10,8 @@ import { Company } from '../../dtos/Company';
 export class CompanyService {
     constructor(private http: HttpClient) {}
 
-    getUniversities(): Observable<Company[]> {
-        return this.http.get<Company[]>(
+    getUniversities(): Observable<ICompany[]> {
+        return this.http.get<ICompany[]>(
             `${endpointAPI}/api/Companies/register`,
             {}
         );
