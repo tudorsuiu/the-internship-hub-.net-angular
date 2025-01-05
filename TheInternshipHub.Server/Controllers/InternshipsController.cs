@@ -55,6 +55,7 @@ namespace TheInternshipHub.Server.Controllers
                 EndDate = internship.IN_END_DATE,
                 PositionsAvailable = internship.IN_POSITIONS_AVAILABLE,
                 Compensation = internship.IN_COMPENSATION,
+                Deadline = internship.IN_DEADLINE,
                 IsDeleted = internship.IN_IS_DELETED
             };
 
@@ -107,6 +108,7 @@ namespace TheInternshipHub.Server.Controllers
                         EndDate = i.IN_END_DATE,
                         PositionsAvailable = i.IN_POSITIONS_AVAILABLE,
                         Compensation = i.IN_COMPENSATION,
+                        Deadline = i.IN_DEADLINE,
                         IsDeleted = i.IN_IS_DELETED,
                     })
                     .ToList();
@@ -137,6 +139,7 @@ namespace TheInternshipHub.Server.Controllers
                        EndDate = i.IN_END_DATE,
                        PositionsAvailable = i.IN_POSITIONS_AVAILABLE,
                        Compensation = i.IN_COMPENSATION,
+                       Deadline = i.IN_DEADLINE,
                        IsDeleted = i.IN_IS_DELETED,
                    })
                    .ToList();
@@ -166,6 +169,7 @@ namespace TheInternshipHub.Server.Controllers
                        EndDate = i.IN_END_DATE,
                        PositionsAvailable = i.IN_POSITIONS_AVAILABLE,
                        Compensation = i.IN_COMPENSATION,
+                       Deadline = i.IN_DEADLINE,
                        IsDeleted = i.IN_IS_DELETED,
                    })
                    .ToList();
@@ -200,6 +204,7 @@ namespace TheInternshipHub.Server.Controllers
                 IN_END_DATE = request.EndDate,
                 IN_POSITIONS_AVAILABLE = request.PositionsAvailable,
                 IN_COMPENSATION = request.Compensation,
+                IN_DEADLINE = request.Deadline,
                 IN_IS_DELETED = request.IsDeleted
             };
 
@@ -241,6 +246,7 @@ namespace TheInternshipHub.Server.Controllers
             internship.IN_END_DATE = request.EndDate;
             internship.IN_POSITIONS_AVAILABLE = request.PositionsAvailable;
             internship.IN_COMPENSATION = request.Compensation;
+            internship.IN_DEADLINE = request.Deadline;
             internship.IN_IS_DELETED = request.IsDeleted;
 
             _context.Internships.Update(internship);

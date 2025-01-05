@@ -22,6 +22,8 @@ namespace TheInternshipHub.Server.Domain.DTOs
 
         public int Compensation { get; set; }
 
+        public DateTime Deadline { get; set; }
+
         public bool IsDeleted { get; set; }
     }
 }

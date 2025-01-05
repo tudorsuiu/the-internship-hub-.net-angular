@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Security.Claims;
 using TheInternshipHub.Server.Domain.DTOs;
 using TheInternshipHub.Server.Domain.Entities;
 using TheInternshipHub.Server.Domain.Interfaces;
 using TheInternshipHub.Server.Domain.SmartService.Domain;
 using TheInternshipHub.Server.Services;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TheInternshipHub.Server.Controllers
 {
@@ -16,12 +19,10 @@ namespace TheInternshipHub.Server.Controllers
     public class ApplicationsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly IAzureBlobStorageService _blobStorageService;
 
-        public ApplicationsController(ApplicationDbContext context, IAzureBlobStorageService blobStorageService)
+        public ApplicationsController(ApplicationDbContext context)
         {
             _context = context;
-            _blobStorageService = blobStorageService;
         }
 
         [HttpGet("{id}")]
@@ -36,6 +37,8 @@ namespace TheInternshipHub.Server.Controllers
 
             var internship = _context.Internships.FirstOrDefault(i => i.IN_ID == application.Internship.IN_ID);
             var student = _context.Users.First(u => u.US_ID == application.Student.US_ID);
+            var company = _context.Companies.FirstOrDefault(c => c.CO_ID == internship.IN_RECRUITER_ID);
+            var university = _context.Companies.FirstOrDefault(c => c.CO_ID == student.US_COMPANY_ID);
 
             var applicationDTO = new ApplicationDTO
             {
@@ -54,7 +57,7 @@ namespace TheInternshipHub.Server.Controllers
                         LastName = internship.Recruiter.US_LAST_NAME,
                         Email = internship.Recruiter.US_EMAIL,
                         PhoneNumber = internship.Recruiter.US_PHONE_NUMBER,
-                        Company = _context.Companies.FirstOrDefault(c => c.CO_ID == internship.Recruiter.US_COMPANY_ID),
+                        Company = company,
                         Role = internship.Recruiter.US_ROLE,
                         City = internship.Recruiter.US_CITY,
                         IsDeleted = internship.Recruiter.US_IS_DELETED
@@ -63,6 +66,7 @@ namespace TheInternshipHub.Server.Controllers
                     EndDate = internship.IN_END_DATE,
                     PositionsAvailable = internship.IN_POSITIONS_AVAILABLE,
                     Compensation = internship.IN_COMPENSATION,
+                    Deadline = internship.IN_DEADLINE,
                     IsDeleted = internship.IN_IS_DELETED
                 },
                 StudentId = application.Student.US_ID,
@@ -73,7 +77,7 @@ namespace TheInternshipHub.Server.Controllers
                     LastName = student.US_LAST_NAME,
                     Email = student.US_EMAIL,
                     PhoneNumber = student.US_PHONE_NUMBER,
-                    Company = _context.Companies.FirstOrDefault(c => c.CO_ID == student.US_COMPANY_ID),
+                    Company = university,
                     Role = student.US_ROLE,
                     City = student.US_CITY,
                     IsDeleted = student.US_IS_DELETED
@@ -96,7 +100,9 @@ namespace TheInternshipHub.Server.Controllers
             if (userRole == "Student")
             {
                 var applications = _context.Applications
-                    .Where(a => a.AP_STUDENT_ID == userId);
+                .Where(a => a.AP_STUDENT_ID == userId);
+
+                var student = _context.Users.FirstOrDefault(u => u.US_ID == userId);
 
                 var applicationDTOs = applications.Select(application => new ApplicationDTO
                 {
@@ -129,15 +135,15 @@ namespace TheInternshipHub.Server.Controllers
                     StudentId = application.Student.US_ID,
                     Student = new UserDTO
                     {
-                        Id = application.Student.US_ID,
-                        FirstName = application.Student.US_FIRST_NAME,
-                        LastName = application.Student.US_LAST_NAME,
-                        Email = application.Student.US_EMAIL,
-                        PhoneNumber = application.Student.US_PHONE_NUMBER,
-                        Company = _context.Companies.FirstOrDefault(c => c.CO_ID == application.Student.US_COMPANY_ID),
-                        Role = application.Student.US_ROLE,
-                        City = application.Student.US_CITY,
-                        IsDeleted = application.Student.US_IS_DELETED
+                        Id = student.US_ID,
+                        FirstName = student.US_FIRST_NAME,
+                        LastName = student.US_LAST_NAME,
+                        Email = student.US_EMAIL,
+                        PhoneNumber = student.US_PHONE_NUMBER,
+                        Company = _context.Companies.FirstOrDefault(c => c.CO_ID == student.US_COMPANY_ID),
+                        Role = student.US_ROLE,
+                        City = student.US_CITY,
+                        IsDeleted = student.US_IS_DELETED
                     },
                     AppliedDate = application.AP_APPLIED_DATE,
                     Status = application.AP_STATUS,
@@ -152,6 +158,8 @@ namespace TheInternshipHub.Server.Controllers
                 var applications = _context.Applications
                     .Where(a => a.Internship.IN_RECRUITER_ID == userId);
 
+                var recruiter = _context.Users.FirstOrDefault(u => u.US_ID == userId);
+
                 var applicationDTOs = applications.Select(application => new ApplicationDTO
                 {
                     Id = application.AP_ID,
@@ -164,15 +172,15 @@ namespace TheInternshipHub.Server.Controllers
                         Company = application.Internship.Company,
                         Recruiter = new UserDTO
                         {
-                            Id = application.Internship.Recruiter.US_ID,
-                            FirstName = application.Internship.Recruiter.US_FIRST_NAME,
-                            LastName = application.Internship.Recruiter.US_LAST_NAME,
-                            Email = application.Internship.Recruiter.US_EMAIL,
-                            PhoneNumber = application.Internship.Recruiter.US_PHONE_NUMBER,
-                            Company = _context.Companies.FirstOrDefault(c => c.CO_ID == application.Internship.Recruiter.US_COMPANY_ID),
-                            Role = application.Internship.Recruiter.US_ROLE,
-                            City = application.Internship.Recruiter.US_CITY,
-                            IsDeleted = application.Internship.Recruiter.US_IS_DELETED
+                            Id = recruiter.US_ID,
+                            FirstName = recruiter.US_FIRST_NAME,
+                            LastName = recruiter.US_LAST_NAME,
+                            Email = recruiter.US_EMAIL,
+                            PhoneNumber = recruiter.US_PHONE_NUMBER,
+                            Company = _context.Companies.FirstOrDefault(c => c.CO_ID == recruiter.US_COMPANY_ID),
+                            Role = recruiter.US_ROLE,
+                            City = recruiter.US_CITY,
+                            IsDeleted = recruiter.US_IS_DELETED
                         },
                         StartDate = application.Internship.IN_START_DATE,
                         EndDate = application.Internship.IN_END_DATE,

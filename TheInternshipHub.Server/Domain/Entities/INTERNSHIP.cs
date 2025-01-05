@@ -39,6 +39,9 @@ namespace TheInternshipHub.Server.Domain.Entities
         public int IN_COMPENSATION { get; set; }
 
         [Required]
+        public DateTime IN_DEADLINE { get; set; }
+
+        [Required]
         public bool IN_IS_DELETED { get; set; }
     }
 }
