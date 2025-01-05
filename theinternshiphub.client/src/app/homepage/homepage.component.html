@@ -35,10 +35,67 @@
                         <li>
                             <a class="dropdown-item" href="#">My Account</a>
                         </li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li>
+                            <a class="dropdown-item" (click)="logout()"
+                                >Logout</a
+                            >
+                        </li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<div class="d-flex align-items-center m-5">
+    <input type="text" class="form-control w-25 me-3" placeholder="Search..." />
+
+    <select class="form-select w-25 me-3" aria-label="Filter by Type">
+        <option value="">Filter</option>
+        <option value="Type1">opt 1</option>
+        <option value="Type2">opt 2</option>
+    </select>
+</div>
+
+<div class="row m-4">
+    <div class="col-md-4 d-flex" *ngFor="let internship of internships">
+        <div class="card mb-4 flex-fill">
+            <div class="card-body d-flex flex-column h-100">
+                <h5
+                    class="card-title d-flex justify-content-between align-items-center">
+                    <strong class="mt-4">{{ internship.title }}</strong>
+                    <img
+                        [src]="internship.company.cO_LOGO_PATH"
+                        alt="Company Logo"
+                        class="ms-3"
+                        style="
+                            height: 40px;
+                            width: auto;
+                            filter: grayscale(1) brightness(0);
+                        " />
+                </h5>
+
+                <p class="card-text ps-4 mb-0">
+                    <strong><i class="bi bi-dot"></i>Compensation:</strong>
+                    {{ internship.compensation }}<br />
+                    <strong
+                        ><i class="bi bi-dot"></i>Positions available:</strong
+                    >
+                    {{ internship.positionsAvailable }}<br />
+                    <strong><i class="bi bi-dot"></i>Start date:</strong>
+                    {{ internship.startDate | date : 'yyyy-MM-dd' }}<br />
+                    <strong><i class="bi bi-dot"></i>End date:</strong>
+                    {{ internship.endDate | date : 'yyyy-MM-dd' }} <br />
+                </p>
+
+                <div class="mt-auto d-flex justify-content-end">
+                    <button
+                        class="btn btn-dark"
+                        (click)="navigateToDetailsPage(internship.id)">
+                        See Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

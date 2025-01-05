@@ -1,0 +1,39 @@
+<main
+    class="main text-font d-flex flex-column align-items-center justify-content-center"
+    style="margin: 0; padding: 0; height: 100vh">
+    <div
+        class="w-100 d-flex align-items-center justify-content-start px-3 position-absolute"
+        style="top: 10px; left: 10px">
+        <button
+            type="button"
+            class="btn btn-link text-dark"
+            (click)="navigateBack()">
+            <i class="bi bi-arrow-left fs-3 me-2"></i>
+        </button>
+    </div>
+
+    <div
+        class="container d-flex justify-content-center align-items-center h-100">
+        <div class="row text-center">
+            <div class="col-md-6 border-end">
+                <img
+                    [src]="internship.company.cO_LOGO_PATH"
+                    alt="Company Logo"
+                    class="ms-3"
+                    style="
+                        height: 40px;
+                        width: auto;
+                        filter: grayscale(1) brightness(0);
+                    " />
+
+                <p><strong>Attribute 2:</strong> Value 2</p>
+                <p><strong>Attribute 3:</strong> Value 3</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Attribute 4:</strong> Value 4</p>
+                <p><strong>Attribute 5:</strong> Value 5</p>
+                <p><strong>Attribute 6:</strong> Value 6</p>
+            </div>
+        </div>
+    </div>
+</main>

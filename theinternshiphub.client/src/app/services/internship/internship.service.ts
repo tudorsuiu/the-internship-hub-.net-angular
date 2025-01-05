@@ -18,4 +18,20 @@ export class InternshipService {
     addInternship(internship: IInternshipAdd) {
         return this.http.post(`${endpointAPI}/api/Internships`, internship);
     }
+
+    deleteInternship(internshipId: string) {
+        return this.http.delete(
+            `${endpointAPI}/api/Internships/${internshipId}`
+        );
+    }
+
+    getInternshipById(internshipId: string): Observable<IInternship> {
+        return this.http.get<IInternship>(
+            `${endpointAPI}/api/Internships/${internshipId}`
+        );
+    }
+
+    updateInternship(internship: IInternship) {
+        return this.http.put(`${endpointAPI}/api/Internships`, internship);
+    }
 }

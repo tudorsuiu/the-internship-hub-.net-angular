@@ -75,9 +75,7 @@
 
                         <button
                             class="btn btn-transparent p-1"
-                            (click)="selectInternship(internship)"
-                            data-bs-toggle="modal"
-                            data-bs-target="#sureToDeleteToggle">
+                            (click)="deleteInternship(internship)">
                             &times;
                         </button>
                     </div>
@@ -93,9 +91,17 @@
                     >
                     {{ internship.positionsAvailable }}<br />
                     <strong><i class="bi bi-dot"></i>Start date:</strong>
-                    {{ internship.startDate }}<br />
+                    {{ internship.startDate | date : 'yyyy-MM-dd' }}<br />
                     <strong><i class="bi bi-dot"></i>End date:</strong>
-                    {{ internship.endDate }}
+                    {{ internship.endDate | date : 'yyyy-MM-dd' }} <br />
+                    <strong> <i class="bi bi-dot"></i> Deleted: </strong>
+                    <span
+                        [ngClass]="{
+                            'text-danger': internship.isDeleted,
+                            'text-dark': !internship.isDeleted
+                        }">
+                        {{ internship.isDeleted }}
+                    </span>
                 </p>
 
                 <div class="mt-auto"></div>

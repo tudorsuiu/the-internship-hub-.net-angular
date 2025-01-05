@@ -39,5 +39,14 @@ export class CompanypageComponent {
         this.router.navigate(['/addInternship']);
     }
 
-    selectInternship(internship: IInternship) {}
+    deleteInternship(internship: IInternship) {
+        this.internshipService.deleteInternship(internship.id).subscribe(
+            (response: any) => {
+                this.loadInternships();
+            },
+            (error: any) => {
+                console.log(error.message);
+            }
+        );
+    }
 }
