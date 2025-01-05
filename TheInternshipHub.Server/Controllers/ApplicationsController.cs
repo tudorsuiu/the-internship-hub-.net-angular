@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using TheInternshipHub.Server.Domain.DTOs;
 using TheInternshipHub.Server.Domain.Entities;
+using TheInternshipHub.Server.Domain.Interfaces;
 using TheInternshipHub.Server.Domain.SmartService.Domain;
+using TheInternshipHub.Server.Services;
 
 namespace TheInternshipHub.Server.Controllers
 {
@@ -14,10 +16,12 @@ namespace TheInternshipHub.Server.Controllers
     public class ApplicationsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IAzureBlobStorageService _blobStorageService;
 
-        public ApplicationsController(ApplicationDbContext context)
+        public ApplicationsController(ApplicationDbContext context, IAzureBlobStorageService blobStorageService)
         {
             _context = context;
+            _blobStorageService = blobStorageService;
         }
 
         [HttpGet("{id}")]

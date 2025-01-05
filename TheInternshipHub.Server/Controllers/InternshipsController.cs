@@ -31,6 +31,7 @@ namespace TheInternshipHub.Server.Controllers
             }
 
             var recruiter = _context.Users.FirstOrDefault(u => u.US_ID == internship.IN_RECRUITER_ID);
+            var company = _context.Companies.FirstOrDefault(c => c.CO_ID == recruiter.US_COMPANY_ID);
 
             var internshipDTO = new InternshipDTO
             {
@@ -45,7 +46,7 @@ namespace TheInternshipHub.Server.Controllers
                     LastName = recruiter.US_LAST_NAME,
                     Email = recruiter.US_EMAIL,
                     PhoneNumber = recruiter.US_PHONE_NUMBER,
-                    Company = _context.Companies.FirstOrDefault(c => c.CO_ID == recruiter.US_COMPANY_ID),
+                    Company = company,
                     Role = recruiter.US_ROLE,
                     City = recruiter.US_CITY,
                     IsDeleted = recruiter.US_IS_DELETED
