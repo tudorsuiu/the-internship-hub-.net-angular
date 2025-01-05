@@ -43,7 +43,7 @@
     </div>
 </nav>
 
-<div class="d-flex align-items-center m-4">
+<div class="d-flex align-items-center m-5">
     <input type="text" class="form-control w-25 me-3" placeholder="Search..." />
 
     <select class="form-select w-25 me-3" aria-label="Filter by Type">
@@ -58,4 +58,48 @@
         (click)="navigateToAddInternship()">
         <i class="bi bi-plus"></i>
     </button>
+</div>
+
+<div class="row m-4">
+    <div class="col-md-4 d-flex" *ngFor="let internship of internships">
+        <div class="card mb-4 flex-fill">
+            <div class="card-body d-flex flex-column h-100">
+                <h5
+                    class="card-title d-flex justify-content-between align-items-center">
+                    <strong class="mt-4">{{ internship.title }}</strong>
+
+                    <div class="d-flex position-absolute top-0 end-0 m-2">
+                        <button class="btn btn-transparent p-1">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+
+                        <button
+                            class="btn btn-transparent p-1"
+                            (click)="selectInternship(internship)"
+                            data-bs-toggle="modal"
+                            data-bs-target="#sureToDeleteToggle">
+                            &times;
+                        </button>
+                    </div>
+                </h5>
+
+                <p class="card-text ps-4 mb-0">
+                    <strong><i class="bi bi-dot"></i>Description:</strong>
+                    {{ internship.description }}<br />
+                    <strong><i class="bi bi-dot"></i>Compensation:</strong>
+                    {{ internship.compensation }}<br />
+                    <strong
+                        ><i class="bi bi-dot"></i>Positions available:</strong
+                    >
+                    {{ internship.positionsAvailable }}<br />
+                    <strong><i class="bi bi-dot"></i>Start date:</strong>
+                    {{ internship.startDate }}<br />
+                    <strong><i class="bi bi-dot"></i>End date:</strong>
+                    {{ internship.endDate }}
+                </p>
+
+                <div class="mt-auto"></div>
+            </div>
+        </div>
+    </div>
 </div>

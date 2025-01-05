@@ -14,7 +14,6 @@ import { AddInternshipComponent } from './add-internship/add-internship.componen
 @NgModule({
     declarations: [
         AppComponent,
-        CompanypageComponent,
         UniversitypageComponent,
         ApplicationsComponent,
     ],
