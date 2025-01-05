@@ -8,7 +8,7 @@ export interface IUser {
     email: string;
     phoneNumber: string;
     company: ICompany;
-    role: Role;
+    role: Role | null;
     city: string;
     isDeleted: boolean;
 }

@@ -10,11 +10,11 @@ import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
 import { RequestInterceptor } from './interceptors/request/request.interceptor';
 import { ApplicationsComponent } from './applications/applications.component';
 import { AddInternshipComponent } from './add-internship/add-internship.component';
+import { DetailsPageComponent } from './details-page/details-page.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        CompanypageComponent,
         UniversitypageComponent,
         ApplicationsComponent,
     ],
