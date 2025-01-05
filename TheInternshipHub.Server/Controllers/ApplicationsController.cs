@@ -226,7 +226,7 @@ namespace TheInternshipHub.Server.Controllers
                 return Unauthorized();
             }
 
-            var internship = _context.Internships.FirstOrDefault(i => i.IN_ID == request.Id);
+            var internship = _context.Internships.FirstOrDefault(i => i.IN_ID == request.InternshipId);
             var student = _context.Users.FirstOrDefault(u => u.US_ID == userId);
 
             var application = new APPLICATION
