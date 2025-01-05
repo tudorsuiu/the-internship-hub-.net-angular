@@ -253,13 +253,6 @@ namespace TheInternshipHub.Server.Controllers
         [HttpPut]
         public async Task<ActionResult<ApplicationDTO>> PutApplication(ApplicationDTO request)
         {
-            var userRole = User.FindFirstValue(ClaimTypes.Role);
-
-            if (userRole != "Recruiter")
-            {
-                return Unauthorized();
-            }
-
             var application = _context.Applications.FirstOrDefault(a => a.AP_ID == request.Id);
 
             if (application == null)
