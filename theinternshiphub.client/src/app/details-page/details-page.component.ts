@@ -5,6 +5,7 @@ import { IInternship } from '../dtos/IInternship';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Role } from '../dtos/IUserRegister';
+import { FileUploadService } from '../services/file-upload/file-upload.service';
 
 @Component({
     selector: 'app-details-page',
@@ -55,7 +56,8 @@ export class DetailsPageComponent {
         private route: ActivatedRoute,
         private router: Router,
         private internshipService: InternshipService,
-        private location: Location
+        private location: Location,
+        private fileUploadService: FileUploadService
     ) {}
 
     ngOnInit(): void {
@@ -72,6 +74,27 @@ export class DetailsPageComponent {
                         console.log(error.message);
                     }
                 );
+        }
+    }
+
+    selectedFile: File | null = null;
+
+    onFileSelected(event: any): void {
+        this.selectedFile = event.target.files[0];
+    }
+
+    onUpload(): void {
+        if (this.selectedFile) {
+            this.fileUploadService.uploadFile(this.selectedFile).subscribe({
+                next: response => {
+                    console.log('File uploaded successfully:', response);
+                },
+                error: err => {
+                    console.error('Error uploading file:', err);
+                },
+            });
+        } else {
+            console.error('No file selected!');
         }
     }
 

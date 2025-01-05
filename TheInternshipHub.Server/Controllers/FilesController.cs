@@ -10,6 +10,8 @@ namespace TheInternshipHub.Server.Controllers
     {
         private readonly IAzureBlobStorageService _azureBlobStorageService;
 
+        const long maxFileSize = 3 * 1024 * 1024;
+
         public FilesController(IAzureBlobStorageService azureBlobStorageService)
         {
             _azureBlobStorageService = azureBlobStorageService;
@@ -23,6 +25,11 @@ namespace TheInternshipHub.Server.Controllers
                 return BadRequest("File is not provided or is empty.");
             }
 
+            if (file.Length > maxFileSize)
+            {
+                return BadRequest("File is not provided or is empty.");
+            }    
+
             var extension = Path.GetExtension(file.FileName).ToLower();
             if (extension != ".pdf")
             {
@@ -35,7 +42,7 @@ namespace TheInternshipHub.Server.Controllers
                 await stream.ReadAsync(fileData, 0, (int)file.Length);
             }
 
-            var fileName = $"{Guid.NewGuid()}{extension}";
+            var fileName = $"{Guid.NewGuid()}_resume{extension}";
             var fileUrl = await _azureBlobStorageService.UploadAsync(fileData, fileName);
 
             return Ok(new { url = fileUrl });
