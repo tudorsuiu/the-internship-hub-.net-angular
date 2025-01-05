@@ -1,0 +1,93 @@
+<main
+    class="main text-font d-flex flex-column align-items-center justify-content-center"
+    style="margin: 0; padding: 0">
+    <div class="w-100 d-flex align-items-center justify-content-start px-3">
+        <button
+            type="button"
+            class="btn btn-link text-dark"
+            (click)="navigateBack()">
+            <i class="bi bi-arrow-left fs-3 me-2"></i>
+        </button>
+    </div>
+
+    <h1 class="text-center mb-4 mt-5">Create internship post</h1>
+
+    <form #resourceForm="ngForm" class="container w-50 mt-3">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label"><strong>Title</strong></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="title"
+                    [(ngModel)]="title"
+                    placeholder="Enter title" />
+
+                <label class="form-label mt-3"
+                    ><strong>Description</strong></label
+                >
+                <textarea
+                    class="form-control"
+                    name="description"
+                    [(ngModel)]="description"
+                    placeholder="Enter description"
+                    rows="6"></textarea>
+
+                <label class="form-label mt-4"><strong>Company</strong></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="company"
+                    [value]="this.user?.company?.cO_NAME"
+                    readonly />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label"><strong>Start date</strong></label>
+                <input
+                    type="date"
+                    class="form-control"
+                    name="startDate"
+                    [(ngModel)]="startDate"
+                    placeholder="Select start date" />
+
+                <label class="form-label mt-3"><strong>End date</strong></label>
+                <input
+                    type="date"
+                    class="form-control"
+                    name="endDate"
+                    [(ngModel)]="endDate"
+                    placeholder="Select end date" />
+
+                <label class="form-label mt-3"
+                    ><strong>Positions available</strong></label
+                >
+                <input
+                    type="number"
+                    class="form-control"
+                    name="positionsAvailable"
+                    [(ngModel)]="positionsAvailable"
+                    placeholder="Enter the number of positions available" />
+
+                <label class="form-label mt-3"
+                    ><strong>Compensation</strong></label
+                >
+                <input
+                    type="number"
+                    class="form-control"
+                    name="compensation"
+                    [(ngModel)]="compensation"
+                    placeholder="Enter compensation in ron" />
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <button
+                type="button"
+                class="btn btn-dark w-50"
+                (click)="addInternship()">
+                Add internship
+            </button>
+        </div>
+    </form>
+</main>

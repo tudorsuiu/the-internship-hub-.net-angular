@@ -32,10 +32,18 @@ export class LoginComponent {
             password: this.password,
         };
         this.authService.login(userLogin).subscribe(
-            (response: any) => {
+            (response: { token: string; role: string }) => {
                 this.clearLocalStorage();
-                localStorage.setItem('token', response);
-                this.router.navigate(['/homepage']);
+                localStorage.setItem('token', response.token);
+                localStorage.setItem('role', response.role);
+
+                if (response.role === 'Student') {
+                    this.router.navigate(['/homepage']);
+                } else if (response.role === 'Recruiter') {
+                    this.router.navigate(['/company']);
+                } else {
+                    this.router.navigate(['/university']);
+                }
             },
             (error: any) => {
                 console.log(error.message);

@@ -1,4 +1,4 @@
-export interface Company {
+export interface ICompany {
     cO_ID: string;
     cO_NAME: string;
     cO_CITY: string;

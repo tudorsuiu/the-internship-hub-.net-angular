@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { IUserRegister, Role } from '../dtos/IUserRegister';
 import { AuthService } from '../services/auth/auth.service';
 import { CompanyService } from '../services/company/company.service';
-import { Company } from '../dtos/Company';
+import { ICompany } from '../dtos/ICompany';
 
 @Component({
     selector: 'app-register',
@@ -25,7 +25,7 @@ export class RegisterComponent {
     role: Role | null = null;
     roles = Object.values(Role);
 
-    companies: Company[] = [];
+    companies: ICompany[] = [];
 
     errorMessage: string = '';
 
@@ -37,7 +37,7 @@ export class RegisterComponent {
 
     ngOnInit() {
         this.companyService.getUniversities().subscribe(
-            (response: Company[]) => {
+            (response: ICompany[]) => {
                 this.companies = response;
             },
             (error: any) => {
