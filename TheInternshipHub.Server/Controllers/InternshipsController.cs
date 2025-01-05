@@ -30,6 +30,8 @@ namespace TheInternshipHub.Server.Controllers
                 return NotFound();
             }
 
+            var recruiter = _context.Users.FirstOrDefault(u => u.US_ID == internship.IN_RECRUITER_ID);
+
             var internshipDTO = new InternshipDTO
             {
                 Id = internship.IN_ID,
@@ -38,15 +40,15 @@ namespace TheInternshipHub.Server.Controllers
                 Company = internship.Company,
                 Recruiter = new UserDTO
                 {
-                    Id = internship.Recruiter.US_ID,
-                    FirstName = internship.Recruiter.US_FIRST_NAME,
-                    LastName = internship.Recruiter.US_LAST_NAME,
-                    Email = internship.Recruiter.US_EMAIL,
-                    PhoneNumber = internship.Recruiter.US_PHONE_NUMBER,
-                    Company = _context.Companies.FirstOrDefault(c => c.CO_ID == internship.Recruiter.US_COMPANY_ID),
-                    Role = internship.Recruiter.US_ROLE,
-                    City = internship.Recruiter.US_CITY,
-                    IsDeleted = internship.Recruiter.US_IS_DELETED
+                    Id = recruiter.US_ID,
+                    FirstName = recruiter.US_FIRST_NAME,
+                    LastName = recruiter.US_LAST_NAME,
+                    Email = recruiter.US_EMAIL,
+                    PhoneNumber = recruiter.US_PHONE_NUMBER,
+                    Company = _context.Companies.FirstOrDefault(c => c.CO_ID == recruiter.US_COMPANY_ID),
+                    Role = recruiter.US_ROLE,
+                    City = recruiter.US_CITY,
+                    IsDeleted = recruiter.US_IS_DELETED
                 },
                 StartDate = internship.IN_START_DATE,
                 EndDate = internship.IN_END_DATE,
