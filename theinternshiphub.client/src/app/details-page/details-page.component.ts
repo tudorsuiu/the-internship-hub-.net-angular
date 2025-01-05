@@ -48,6 +48,7 @@ export class DetailsPageComponent {
         positionsAvailable: 0,
         compensation: 0,
         isDeleted: false,
+        deadline: new Date(),
     };
 
     constructor(

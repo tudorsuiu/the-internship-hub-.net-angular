@@ -12,4 +12,5 @@ export interface IInternship {
     positionsAvailable: number;
     compensation: number;
     isDeleted: boolean;
+    deadline: Date;
 }

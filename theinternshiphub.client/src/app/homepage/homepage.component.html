@@ -1,7 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">The Internship Hub</a>
-
         <button
             class="navbar-toggler"
             type="button"
@@ -12,14 +11,13 @@
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/homepage">Homepage</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My Applications</a>
+                    <a class="nav-link" href="/applications">My Applications</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a
@@ -28,9 +26,9 @@
                         id="navbarDropdown"
                         role="button"
                         data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        My Account
-                    </a>
+                        aria-expanded="false"
+                        >My Account</a
+                    >
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
                             <a class="dropdown-item" href="#">My Account</a>
@@ -46,19 +44,25 @@
         </div>
     </div>
 </nav>
-
 <div class="d-flex align-items-center m-5">
-    <input type="text" class="form-control w-25 me-3" placeholder="Search..." />
+    <input
+        type="text"
+        class="form-control w-25 me-3"
+        placeholder="Search..."
+        (input)="onInputChange($event)" />
 
-    <select class="form-select w-25 me-3" aria-label="Filter by Type">
-        <option value="">Filter</option>
-        <option value="Type1">opt 1</option>
-        <option value="Type2">opt 2</option>
+    <select
+        class="form-select w-25 me-3"
+        aria-label="Sort"
+        (change)="onSortChange($event)">
+        <option value="">Sort</option>
+        <option value="compensation_asc">Compensation: Low to High</option>
+        <option value="compensation_desc">Compensation: High to Low</option>
     </select>
 </div>
 
 <div class="row m-4">
-    <div class="col-md-4 d-flex" *ngFor="let internship of internships">
+    <div class="col-md-4 d-flex" *ngFor="let internship of filteredInternships">
         <div class="card mb-4 flex-fill">
             <div class="card-body d-flex flex-column h-100">
                 <h5
@@ -76,8 +80,6 @@
                 </h5>
 
                 <p class="card-text ps-4 mb-0">
-                    <strong><i class="bi bi-dot"></i>Compensation:</strong>
-                    {{ internship.compensation }}<br />
                     <strong
                         ><i class="bi bi-dot"></i>Positions available:</strong
                     >
@@ -85,7 +87,11 @@
                     <strong><i class="bi bi-dot"></i>Start date:</strong>
                     {{ internship.startDate | date : 'yyyy-MM-dd' }}<br />
                     <strong><i class="bi bi-dot"></i>End date:</strong>
-                    {{ internship.endDate | date : 'yyyy-MM-dd' }} <br />
+                    {{ internship.endDate | date : 'yyyy-MM-dd' }}<br />
+                    <strong><i class="bi bi-dot"></i>Compensation:</strong>
+                    {{ internship.compensation }}<br />
+                    <strong><i class="bi bi-dot"></i>Deadline:</strong>
+                    {{ internship.deadline | date : 'yyyy-MM-dd' }}<br />
                 </p>
 
                 <div class="mt-auto d-flex justify-content-end">

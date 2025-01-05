@@ -23,6 +23,7 @@ export class AddInternshipComponent {
     endDate: Date | null = null;
     positionsAvailable: number | null = null;
     compensation: number | null = null;
+    deadline: Date | null = null;
 
     user: IUser | null = null;
 
@@ -59,6 +60,7 @@ export class AddInternshipComponent {
             positionsAvailable: this.positionsAvailable,
             compensation: this.compensation,
             isDeleted: false,
+            deadline: this.deadline,
         };
         this.internshipService.addInternship(internship).subscribe(
             (response: any) => {

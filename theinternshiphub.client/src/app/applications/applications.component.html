@@ -1,1 +1,87 @@
-<p>applications works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">The Internship Hub</a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/homepage">Homepage</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/applications">My Applications</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="navbarDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        My Account
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="#">My Account</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" (click)="logout()"
+                                >Logout</a
+                            >
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="d-flex justify-content-center m-5">
+    <table class="table table-striped w-75">
+        <thead>
+            <tr>
+                <th scope="col">Internship Title</th>
+                <th scope="col">Applied Date</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let application of applications">
+                <td>{{ application.internship.title }}</td>
+                <td>
+                    {{ application.appliedDate | date : 'YYYY-MM-dd HH:mm' }}
+                </td>
+                <td>
+                    {{ application.status }}
+                </td>
+                <td class="text-center">
+                    <button
+                        *ngIf="application.status === 'Accepted'"
+                        class="btn btn-dark me-2"
+                        (click)="confirmAcceptance(application)">
+                        Confirm
+                    </button>
+
+                    <button
+                        *ngIf="application.status === 'Accepted'"
+                        class="btn btn-dark"
+                        (click)="rejectAcceptance(application)">
+                        Refuse
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -4,20 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CompanypageComponent } from './companypage/companypage.component';
 import { UniversitypageComponent } from './universitypage/universitypage.component';
 import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
 import { RequestInterceptor } from './interceptors/request/request.interceptor';
-import { ApplicationsComponent } from './applications/applications.component';
-import { AddInternshipComponent } from './add-internship/add-internship.component';
-import { DetailsPageComponent } from './details-page/details-page.component';
+import { MyaccountComponent } from './myaccount/myaccount.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        UniversitypageComponent,
-        ApplicationsComponent,
-    ],
+    declarations: [AppComponent, UniversitypageComponent, MyaccountComponent],
     imports: [BrowserModule, HttpClientModule, AppRoutingModule],
     providers: [
         {

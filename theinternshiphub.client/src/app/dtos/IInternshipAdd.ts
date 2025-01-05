@@ -11,4 +11,5 @@ export interface IInternshipAdd {
     positionsAvailable: number | null;
     compensation: number | null;
     isDeleted: boolean;
+    deadline: Date | null;
 }
