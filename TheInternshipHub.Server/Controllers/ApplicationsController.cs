@@ -261,6 +261,8 @@ namespace TheInternshipHub.Server.Controllers
             }
 
             application.AP_STATUS = request.Status;
+            application.AP_CV_FILE_PATH = request.CVFilePath;
+            application.AP_IS_DELETED = request.IsDeleted;
 
             _context.Applications.Update(application);
             await _context.SaveChangesAsync();
