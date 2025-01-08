@@ -94,7 +94,8 @@ namespace TheInternshipHub.Server.Controllers
             if (userRole == "Student")
             {
                 var applications = _context.Applications
-                .Where(a => a.AP_STUDENT_ID == userId);
+                .Where(a => a.AP_STUDENT_ID == userId)
+                .ToList();
 
                 var student = _context.Users.FirstOrDefault(u => u.US_ID == userId);
 
@@ -150,7 +151,8 @@ namespace TheInternshipHub.Server.Controllers
             else if (userRole == "Recruiter")
             {
                 var applications = _context.Applications
-                    .Where(a => a.Internship.IN_RECRUITER_ID == userId);
+                    .Where(a => a.Internship.IN_RECRUITER_ID == userId)
+                    .ToList();
 
                 var recruiter = _context.Users.FirstOrDefault(u => u.US_ID == userId);
 

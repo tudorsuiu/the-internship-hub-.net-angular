@@ -122,5 +122,50 @@ namespace TheInternshipHub.Server.Controllers
 
             return Ok();
         }
+
+        [HttpGet("students")]
+        public async Task<ActionResult<UserDTO>> GetStudents()
+        {
+            var userId = new Guid(User.FindFirstValue("id"));
+            var userRole = User.FindFirstValue(ClaimTypes.Role);
+
+            if (userRole != "University")
+            {
+                return Unauthorized();
+            }
+
+            var universityId = _context.Users.FirstOrDefault(u => u.US_ID == userId).US_COMPANY_ID;
+            var university = _context.Companies.FirstOrDefault(c => c.CO_ID == universityId);
+
+            if (university == null)
+            {
+                return NotFound();
+            }
+
+            var students = _context.Users.Where(u => u.US_IS_DELETED == false && u.US_ROLE == "Student" && u.US_COMPANY_ID == universityId).ToList();
+
+            var result = new List<UniversityStudentDTO>();
+
+            foreach (var student in students)
+            {
+                var application = _context.Applications.FirstOrDefault(a => a.AP_IS_DELETED == false && a.AP_STUDENT_ID == student.US_ID);
+
+                result.Add(new UniversityStudentDTO()
+                {
+                    StudentId = student.US_ID,
+                    StudentFirstName = student.US_FIRST_NAME,
+                    StudentLastName = student.US_LAST_NAME,
+                    StudentEmail = student.US_EMAIL,
+                    StudentPhoneNumber = student.US_PHONE_NUMBER,
+                    University = university.CO_NAME,
+                    ApplicationId = application is null ? Guid.Empty : application.AP_ID,
+                    InternshipId = application is null ? Guid.Empty : application.AP_INTERNSHIP_ID,
+                    ApplicationStatus = application is null ? "" : application.AP_STATUS,
+                    ApplicationCVFilePath = application is null ? "" : application.AP_CV_FILE_PATH
+                });
+            }
+
+            return Ok(result);
+        }
     }
 }
