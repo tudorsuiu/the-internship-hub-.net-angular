@@ -10,7 +10,15 @@ import { endpointAPI } from '../../../config';
 export class UserService {
     constructor(private http: HttpClient) {}
 
-    getUserById(): Observable<IUser> {
+    getLoggedUSer(): Observable<IUser> {
         return this.http.get<IUser>(`${endpointAPI}/api/Users/logged-user`);
+    }
+
+    updateUser(user: IUser) {
+        return this.http.put(`${endpointAPI}/api/Users`, user);
+    }
+
+    deleteUser(userId: string) {
+        return this.http.delete(`${endpointAPI}/api/Users/${userId}`);
     }
 }
