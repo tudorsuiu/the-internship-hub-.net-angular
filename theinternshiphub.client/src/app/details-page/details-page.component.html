@@ -58,16 +58,31 @@
                 </p>
 
                 <p class="mb-3">
+                    <i class="bi bi-person"></i>
+                    <strong> Recruiter contact:</strong>
+                    {{ internship.recruiter.email }}
+                </p>
+
+                <p class="mb-5">
                     <i class="bi bi-calendar"></i>
                     <strong> Deadline for application:</strong>
                     {{ internship.deadline | date : 'yyyy-MM-dd' }}
                 </p>
 
-                <div class="file-upload mb-3">
-                    <input type="file" (change)="onFileSelected($event)" />
+                <div class="file-upload mt-2">
+                    <div class="file-upload mb-0 text-center">
+                        <label for="fileInput" class="btn btn-dark w-50">
+                            Upload CV
+                            <input
+                                id="fileInput"
+                                type="file"
+                                (change)="onFileSelected($event)"
+                                class="d-none" />
+                        </label>
+                    </div>
                 </div>
 
-                <div class="text-center mt-5">
+                <div class="text-center mt-1">
                     <button
                         type="button"
                         class="btn btn-dark w-50"

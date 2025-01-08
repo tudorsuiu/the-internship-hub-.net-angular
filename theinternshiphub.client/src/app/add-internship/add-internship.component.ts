@@ -35,7 +35,7 @@ export class AddInternshipComponent {
     ) {}
 
     ngOnInit() {
-        this.userService.getUserById().subscribe(
+        this.userService.getLoggedUSer().subscribe(
             (response: IUser) => {
                 this.user = response;
             },

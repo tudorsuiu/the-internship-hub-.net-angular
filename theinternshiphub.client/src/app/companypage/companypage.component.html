@@ -19,7 +19,9 @@
                     <a class="nav-link" href="/company">Homepage</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Applications</a>
+                    <a class="nav-link" href="/companyApplications"
+                        >Applications</a
+                    >
                 </li>
                 <li class="nav-item dropdown">
                     <a
@@ -33,9 +35,15 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item" href="#">My Account</a>
+                            <a class="dropdown-item" href="/myaccount"
+                                >My Account</a
+                            >
                         </li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li>
+                            <a class="dropdown-item" (click)="logout()"
+                                >Logout</a
+                            >
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -44,12 +52,19 @@
 </nav>
 
 <div class="d-flex align-items-center m-5">
-    <input type="text" class="form-control w-25 me-3" placeholder="Search..." />
+    <input
+        type="text"
+        class="form-control w-25 me-3"
+        placeholder="Search..."
+        (input)="onInputChange($event)" />
 
-    <select class="form-select w-25 me-3" aria-label="Filter by Type">
-        <option value="">Filter</option>
-        <option value="Type1">opt 1</option>
-        <option value="Type2">opt 2</option>
+    <select
+        class="form-select w-25 me-3"
+        aria-label="Sort"
+        (change)="onSortChange($event)">
+        <option value="">Sort</option>
+        <option value="compensation_asc">Compensation: Low to High</option>
+        <option value="compensation_desc">Compensation: High to Low</option>
     </select>
 
     <button
@@ -61,7 +76,7 @@
 </div>
 
 <div class="row m-4">
-    <div class="col-md-4 d-flex" *ngFor="let internship of internships">
+    <div class="col-md-4 d-flex" *ngFor="let internship of filteredInternships">
         <div class="card mb-4 flex-fill">
             <div class="card-body d-flex flex-column h-100">
                 <h5
@@ -69,7 +84,9 @@
                     <strong class="mt-4">{{ internship.title }}</strong>
 
                     <div class="d-flex position-absolute top-0 end-0 m-2">
-                        <button class="btn btn-transparent p-1">
+                        <button
+                            class="btn btn-transparent p-1"
+                            (click)="navigateToUpdateInternship(internship.id)">
                             <i class="bi bi-pencil"></i>
                         </button>
 
