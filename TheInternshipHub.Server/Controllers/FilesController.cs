@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TheInternshipHub.Server.Domain.Interfaces;
 
 namespace TheInternshipHub.Server.Controllers

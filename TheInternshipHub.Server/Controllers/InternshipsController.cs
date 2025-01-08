@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using TheInternshipHub.Server.Domain.DTOs;
 using TheInternshipHub.Server.Domain.Entities;

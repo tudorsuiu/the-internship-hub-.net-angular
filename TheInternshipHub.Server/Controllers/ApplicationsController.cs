@@ -1,15 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Security.Claims;
 using TheInternshipHub.Server.Domain.DTOs;
 using TheInternshipHub.Server.Domain.Entities;
-using TheInternshipHub.Server.Domain.Interfaces;
 using TheInternshipHub.Server.Domain.SmartService.Domain;
-using TheInternshipHub.Server.Services;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace TheInternshipHub.Server.Controllers
 {

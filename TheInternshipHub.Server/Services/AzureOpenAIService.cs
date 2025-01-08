@@ -1,8 +1,6 @@
 ﻿using Azure.AI.OpenAI;
-using OpenAI;
 using OpenAI.Chat;
 using System.ClientModel;
-using System.Text.Json;
 using TheInternshipHub.Server.Domain.Interfaces;
 
 namespace TheInternshipHub.Server.Services;
