@@ -159,8 +159,7 @@ namespace TheInternshipHub.Server.Controllers
             foreach (var student in students)
             {
                 var applications = _context.Applications
-                    .Where(a => a.AP_IS_DELETED == false && a.AP_STUDENT_ID == student.US_ID &&
-                    a.AP_STATUS != "Declined" && a.AP_STATUS != "Rejected")
+                    .Where(a => a.AP_IS_DELETED == false && a.AP_STUDENT_ID == student.US_ID && a.AP_STATUS != "Declined" && a.AP_STATUS != "Rejected")
                     .ToList();
 
                 var mostAdvancedApplication = applications
