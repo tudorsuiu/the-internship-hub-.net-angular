@@ -33,7 +33,6 @@ export class ApplicationsComponent {
         this.applicationService.getApplications().subscribe(
             (response: any) => {
                 this.applications = response;
-                console.log(this.applications);
             },
             (error: any) => {
                 console.log(error.message);

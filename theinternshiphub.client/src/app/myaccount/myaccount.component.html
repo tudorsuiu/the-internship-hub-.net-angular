@@ -1,1 +1,88 @@
-<p>myaccount works!</p>
+<main
+    class="main text-font d-flex flex-column align-items-center justify-content-center"
+    style="margin: 0; padding: 0">
+    <div class="w-100 d-flex align-items-center justify-content-start px-3">
+        <button
+            type="button"
+            class="btn btn-link text-dark"
+            (click)="navigateBack()">
+            <i class="bi bi-arrow-left fs-3 me-2"></i>
+        </button>
+    </div>
+
+    <h1 class="text-center mb-4 mt-5">My account</h1>
+
+    <form #resourceForm="ngForm" class="container w-50 mt-3">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label"><strong>First name</strong></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="firstName"
+                    [(ngModel)]="firstName" />
+
+                <label class="form-label"><strong>Last name</strong></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="lastName"
+                    [(ngModel)]="lastName" />
+
+                <label class="form-label"><strong>Email</strong></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="email"
+                    [(ngModel)]="email" />
+
+                <label class="form-label"><strong>Phone number</strong></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="phoneNumber"
+                    [(ngModel)]="phoneNumber" />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label"><strong>Company</strong></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="company"
+                    [(ngModel)]="company.cO_NAME"
+                    disabled />
+
+                <label class="form-label"><strong>Role</strong></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="role"
+                    [(ngModel)]="role"
+                    disabled />
+
+                <label class="form-label"><strong>City</strong></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="city"
+                    [(ngModel)]="city" />
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <button
+                type="button"
+                class="btn btn-danger me-2 w-25"
+                (click)="deleteAccount()">
+                Delete account
+            </button>
+            <button
+                type="button"
+                class="btn btn-dark w-25"
+                (click)="updateUser()">
+                Save profile
+            </button>
+        </div>
+    </form>
+</main>
