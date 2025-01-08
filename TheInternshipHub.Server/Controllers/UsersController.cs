@@ -144,11 +144,28 @@ namespace TheInternshipHub.Server.Controllers
 
             var students = _context.Users.Where(u => u.US_IS_DELETED == false && u.US_ROLE == "Student" && u.US_COMPANY_ID == universityId).ToList();
 
+            var statusOrder = new List<string>
+             {
+                "Applied",
+                "In review",
+                "Technical test phase",
+                "Interview phase",
+                "Accepted",
+                "Confirmed"
+            };
+
             var result = new List<UniversityStudentDTO>();
 
             foreach (var student in students)
             {
-                var application = _context.Applications.FirstOrDefault(a => a.AP_IS_DELETED == false && a.AP_STUDENT_ID == student.US_ID);
+                var applications = _context.Applications
+                    .Where(a => a.AP_IS_DELETED == false && a.AP_STUDENT_ID == student.US_ID &&
+                    a.AP_STATUS != "Declined" && a.AP_STATUS != "Rejected")
+                    .ToList();
+
+                var mostAdvancedApplication = applications
+                    .OrderBy(a => statusOrder.IndexOf(a.AP_STATUS))
+                    .FirstOrDefault();
 
                 result.Add(new UniversityStudentDTO()
                 {
@@ -158,10 +175,10 @@ namespace TheInternshipHub.Server.Controllers
                     StudentEmail = student.US_EMAIL,
                     StudentPhoneNumber = student.US_PHONE_NUMBER,
                     University = university.CO_NAME,
-                    ApplicationId = application is null ? Guid.Empty : application.AP_ID,
-                    InternshipId = application is null ? Guid.Empty : application.AP_INTERNSHIP_ID,
-                    ApplicationStatus = application is null ? "" : application.AP_STATUS,
-                    ApplicationCVFilePath = application is null ? "" : application.AP_CV_FILE_PATH
+                    ApplicationId = mostAdvancedApplication is null ? Guid.Empty : mostAdvancedApplication.AP_ID,
+                    InternshipId = mostAdvancedApplication is null ? Guid.Empty : mostAdvancedApplication.AP_INTERNSHIP_ID,
+                    ApplicationStatus = mostAdvancedApplication is null ? "" : mostAdvancedApplication.AP_STATUS,
+                    ApplicationCVFilePath = mostAdvancedApplication is null ? "" : mostAdvancedApplication.AP_CV_FILE_PATH
                 });
             }
 
