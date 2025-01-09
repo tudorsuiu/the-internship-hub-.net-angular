@@ -29,6 +29,8 @@ namespace TheInternshipHub.Server.Domain.Entities
         [Required]
         public string AP_CV_FILE_PATH { get; set; }
 
+        public string AP_UNIVERSITY_DOCS_FILE_PATH { get; set; }
+
         [Required]
         public bool AP_IS_DELETED { get; set; }
     }

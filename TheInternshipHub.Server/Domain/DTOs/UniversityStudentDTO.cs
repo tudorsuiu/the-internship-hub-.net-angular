@@ -20,6 +20,8 @@
 
         public string ApplicationStatus { get; set; }
 
-        public string ApplicationCVFilePath {  get; set; }
+        public string ApplicationCVFilePath { get; set; }
+
+        public string ApplicationUniversityDocsFilePath { get; set; }
     }
 }
