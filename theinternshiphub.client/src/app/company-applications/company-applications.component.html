@@ -1,3 +1,8 @@
+<div *ngIf="isLoading" class="spinner-overlay">
+    <div class="spinner-grow text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 <div
     class="modal"
     id="candidateProfileModal"
@@ -426,9 +431,7 @@
                     <button
                         class="btn btn-primary"
                         title="Generate candidate profile (AI)"
-                        (click)="generateCandidateProfile(application.id)"
-                        data-bs-toggle="modal"
-                        data-bs-target="#candidateProfileModal">
+                        (click)="onGenerateCandidateProfile(application.id)">
                         <i class="bi bi-robot"></i>
                     </button>
                 </td>

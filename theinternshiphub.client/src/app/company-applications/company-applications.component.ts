@@ -12,6 +12,7 @@ import {
 } from 'rxjs';
 import { Router } from '@angular/router';
 import { ICandidateProfileDTO } from '../dtos/CandidateProfile/ICandidateProfileDTO';
+import { Modal } from 'bootstrap';
 
 @Component({
     selector: 'app-company-applications',
@@ -24,6 +25,7 @@ export class CompanyApplicationsComponent {
     applications: IApplication[] = [];
     filteredApplications: IApplication[] = [];
     private searchSubject = new Subject<string>();
+    isLoading = false;
 
     candidateProfile: ICandidateProfileDTO = {
         personalInformation: {
@@ -196,15 +198,40 @@ export class CompanyApplicationsComponent {
         localStorage.clear();
     }
 
-    generateCandidateProfile(applicationId: string) {
-        this.applicationService.getCandidateProfile(applicationId).subscribe(
-            (response: any) => {
-                this.candidateProfile = response;
-                console.log(this.candidateProfile);
-            },
-            (error: any) => {
-                console.log(error.message);
+    async generateCandidateProfile(applicationId: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.applicationService
+                .getCandidateProfile(applicationId)
+                .subscribe(
+                    (response: any) => {
+                        this.candidateProfile = response;
+                        console.log(this.candidateProfile);
+                        resolve();
+                    },
+                    (error: any) => {
+                        console.error(error.message);
+                        reject(error);
+                    }
+                );
+        });
+    }
+
+    async onGenerateCandidateProfile(applicationId: string) {
+        try {
+            this.isLoading = true;
+            await this.generateCandidateProfile(applicationId);
+
+            const modalElement = document.getElementById(
+                'candidateProfileModal'
+            );
+            if (modalElement) {
+                const modal = new Modal(modalElement);
+                modal.show();
             }
-        );
+        } catch (error) {
+            console.error('Failed to generate candidate profile:', error);
+        } finally {
+            this.isLoading = false;
+        }
     }
 }
