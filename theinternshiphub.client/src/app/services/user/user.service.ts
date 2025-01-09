@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IUser } from '../../dtos/IUser';
 import { endpointAPI } from '../../../config';
+import { IUniversityStudent } from '../../dtos/IUniversityStudent';
 
 @Injectable({
     providedIn: 'root',
@@ -20,5 +21,11 @@ export class UserService {
 
     deleteUser(userId: string) {
         return this.http.delete(`${endpointAPI}/api/Users/${userId}`);
+    }
+
+    getStudents(): Observable<IUniversityStudent[]> {
+        return this.http.get<IUniversityStudent[]>(
+            `${endpointAPI}/api/Users/students`
+        );
     }
 }

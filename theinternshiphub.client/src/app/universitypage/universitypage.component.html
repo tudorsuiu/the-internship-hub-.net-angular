@@ -14,11 +14,11 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/university">Homepage</a>
+                    <a class="nav-link" href="/university">Students</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/universityApplications"
-                        >My Applications</a
+                        >Documents</a
                     >
                 </li>
                 <li class="nav-item dropdown">
@@ -48,3 +48,31 @@
         </div>
     </div>
 </nav>
+
+<div class="d-flex justify-content-center m-5">
+    <table class="table table-striped w-75">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Company</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students">
+                <td>
+                    {{ student.studentLastName }} {{ student.studentFirstName }}
+                </td>
+                <td>
+                    {{ student.studentEmail }}
+                </td>
+                <td>{{ student.internship?.company?.cO_NAME }}</td>
+                <td>{{ student.applicationStatus }}</td>
+
+                <td class="text-center"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
