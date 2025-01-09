@@ -22,7 +22,7 @@ export class RegisterComponent {
     city: string = '';
     selectedCompany: string = '';
     password: string = '';
-    role: Role | null = null;
+    role: Role | null = Role.Student;
     roles = Object.values(Role);
 
     companies: ICompany[] = [];

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">The Internship Hub</a>
 
@@ -51,7 +51,9 @@
     </div>
 </nav>
 
-<div class="d-flex align-items-center m-5">
+<h2 class="text-center mt-5 mb-0">Manage internships</h2>
+
+<div class="d-flex align-items-center m-5 justify-content-center">
     <input
         type="text"
         class="form-control w-25 me-3"
@@ -69,7 +71,7 @@
 
     <button
         type="button"
-        class="btn btn-dark"
+        class="btn btn-primary"
         (click)="navigateToAddInternship()">
         <i class="bi bi-plus"></i>
     </button>
@@ -99,19 +101,15 @@
                 </h5>
 
                 <p class="card-text ps-4 mb-0">
-                    <strong><i class="bi bi-dot"></i>Description:</strong>
-                    {{ internship.description }}<br />
-                    <strong><i class="bi bi-dot"></i>Compensation:</strong>
+                    <strong>💰 Compensation:</strong>
                     {{ internship.compensation }}<br />
-                    <strong
-                        ><i class="bi bi-dot"></i>Positions available:</strong
-                    >
+                    <strong>📍 Positions available:</strong>
                     {{ internship.positionsAvailable }}<br />
-                    <strong><i class="bi bi-dot"></i>Start date:</strong>
+                    <strong>📅 Start date:</strong>
                     {{ internship.startDate | date : 'yyyy-MM-dd' }}<br />
-                    <strong><i class="bi bi-dot"></i>End date:</strong>
+                    <strong>📅 End date:</strong>
                     {{ internship.endDate | date : 'yyyy-MM-dd' }} <br />
-                    <strong> <i class="bi bi-dot"></i> Deleted: </strong>
+                    <strong>❌ Deleted:</strong>
                     <span
                         [ngClass]="{
                             'text-danger': internship.isDeleted,
@@ -120,7 +118,7 @@
                         {{ internship.isDeleted }}
                     </span>
                     <br />
-                    <strong><i class="bi bi-dot"></i>Deadline:</strong>
+                    <strong>⏳ Deadline:</strong>
                     {{ internship.deadline | date : 'yyyy-MM-dd' }} <br />
                 </p>
 

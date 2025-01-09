@@ -9,7 +9,7 @@ import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
 import { RequestInterceptor } from './interceptors/request/request.interceptor';
 
 @NgModule({
-    declarations: [AppComponent, UniversitypageComponent],
+    declarations: [AppComponent],
     imports: [BrowserModule, HttpClientModule, AppRoutingModule],
     providers: [
         {

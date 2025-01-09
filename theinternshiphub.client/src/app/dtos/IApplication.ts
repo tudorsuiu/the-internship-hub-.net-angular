@@ -11,4 +11,5 @@ export interface IApplication {
     status: string;
     cvFilePath: string;
     isDeleted: boolean;
+    universityDocsFilePath: string | undefined;
 }

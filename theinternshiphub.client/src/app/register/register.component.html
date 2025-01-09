@@ -65,8 +65,7 @@
 
                 <label class="form-label mt-3"><strong>Role</strong></label>
                 <select class="form-control" name="role" [(ngModel)]="role">
-                    <option value="" disabled>Select a role</option>
-                    <option *ngFor="let r of roles" [value]="r">{{ r }}</option>
+                    <option value="Student" disabled>Student</option>
                 </select>
 
                 <label class="form-label mt-3"><strong>City</strong></label>
@@ -82,7 +81,7 @@
         <div class="text-center mt-5">
             <button
                 type="button"
-                class="btn btn-dark w-50"
+                class="btn btn-primary w-50"
                 (click)="register(userForm)">
                 Register
             </button>

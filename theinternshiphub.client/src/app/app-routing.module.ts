@@ -13,7 +13,7 @@ import { UpdateInternshipComponent } from './update-internship/update-internship
 import { CompanyApplicationsComponent } from './company-applications/company-applications.component';
 
 const routes: Routes = [
-    { path: '', component: HomepageComponent, pathMatch: 'full' },
+    { path: '', component: LoginComponent, pathMatch: 'full' },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
     { path: 'homepage', component: HomepageComponent },

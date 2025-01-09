@@ -10,7 +10,7 @@
         </button>
     </div>
 
-    <h1 class="text-center mb-4 mt-5">Create internship post</h1>
+    <h1 class="text-center mb-4 mt-5">Update internship post</h1>
 
     <form #resourceForm="ngForm" class="container w-50 mt-3">
         <div class="row">
@@ -46,7 +46,6 @@
                     class="form-control"
                     name="isDeleted"
                     [(ngModel)]="isDeleted">
-                    <option value="" disabled>{{ isDeleted }}</option>
                     <option>true</option>
                     <option>false</option>
                 </select>
@@ -99,7 +98,7 @@
         <div class="text-center mt-5">
             <button
                 type="button"
-                class="btn btn-dark w-50"
+                class="btn btn-primary w-50"
                 (click)="updateInternship()">
                 Update internship
             </button>

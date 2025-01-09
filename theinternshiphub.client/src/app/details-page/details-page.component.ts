@@ -123,8 +123,6 @@ export class DetailsPageComponent {
         this.selectedFile = event.target.files[0];
     }
 
-    getLoggedUser() {}
-
     onUpload(): void {
         if (this.selectedFile) {
             const fileName = this.selectedFile.name;
@@ -151,6 +149,7 @@ export class DetailsPageComponent {
                         status: 'Applied',
                         cvFilePath: url,
                         isDeleted: false,
+                        universityDocsFilePath: '',
                     };
 
                     this.applicationService

@@ -163,7 +163,7 @@ namespace TheInternshipHub.Server.Controllers
                     .ToList();
 
                 var mostAdvancedApplication = applications
-                    .OrderBy(a => statusOrder.IndexOf(a.AP_STATUS))
+                    .OrderByDescending(a => statusOrder.IndexOf(a.AP_STATUS))
                     .FirstOrDefault();
 
                 result.Add(new UniversityStudentDTO()
