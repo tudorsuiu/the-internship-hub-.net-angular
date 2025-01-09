@@ -99,52 +99,60 @@ namespace TheInternshipHub.Server.Controllers
 
                 var student = _context.Users.FirstOrDefault(u => u.US_ID == userId);
 
-                var applicationDTOs = applications.Select(application => new ApplicationDTO
+                var applicationDTOs = new List<ApplicationDTO>();
+
+                foreach(var application in applications)
                 {
-                    Id = application.AP_ID,
-                    InternshipId = application.Internship.IN_ID,
-                    Internship = new InternshipDTO
+                    var internship = _context.Internships.FirstOrDefault(i => i.IN_ID == application.AP_INTERNSHIP_ID);
+                    var recruiter = _context.Users.FirstOrDefault(u => u.US_ID == internship.IN_RECRUITER_ID);
+
+                    applicationDTOs.Add(new ApplicationDTO
                     {
-                        Id = application.Internship.IN_ID,
-                        Title = application.Internship.IN_TITLE,
-                        Description = application.Internship.IN_DESCRIPTION,
-                        Company = application.Internship.Company,
-                        Recruiter = new UserDTO
+                        Id = application.AP_ID,
+                        InternshipId = application.AP_INTERNSHIP_ID,
+                        Internship = new InternshipDTO
                         {
-                            Id = application.Internship.Recruiter.US_ID,
-                            FirstName = application.Internship.Recruiter.US_FIRST_NAME,
-                            LastName = application.Internship.Recruiter.US_LAST_NAME,
-                            Email = application.Internship.Recruiter.US_EMAIL,
-                            PhoneNumber = application.Internship.Recruiter.US_PHONE_NUMBER,
-                            Company = _context.Companies.FirstOrDefault(c => c.CO_ID == application.Internship.Recruiter.US_COMPANY_ID),
-                            Role = application.Internship.Recruiter.US_ROLE,
-                            City = application.Internship.Recruiter.US_CITY,
-                            IsDeleted = application.Internship.Recruiter.US_IS_DELETED
+                            Id = application.AP_INTERNSHIP_ID,
+                            Title = internship.IN_TITLE,
+                            Description = internship.IN_DESCRIPTION,
+                            Company = internship.Company,
+                            Recruiter = new UserDTO
+                            {
+                                Id = recruiter.US_ID,
+                                FirstName = recruiter.US_FIRST_NAME,
+                                LastName = recruiter.US_LAST_NAME,
+                                Email = recruiter.US_EMAIL,
+                                PhoneNumber = recruiter.US_PHONE_NUMBER,
+                                Company = _context.Companies.FirstOrDefault(c => c.CO_ID == recruiter.US_COMPANY_ID),
+                                Role = recruiter.US_ROLE,
+                                City = recruiter.US_CITY,
+                                IsDeleted = recruiter.US_IS_DELETED
+                            },
+                            StartDate = internship.IN_START_DATE,
+                            EndDate = internship.IN_END_DATE,
+                            PositionsAvailable = internship.IN_POSITIONS_AVAILABLE,
+                            Compensation = internship.IN_COMPENSATION,
+                            IsDeleted = internship.IN_IS_DELETED
                         },
-                        StartDate = application.Internship.IN_START_DATE,
-                        EndDate = application.Internship.IN_END_DATE,
-                        PositionsAvailable = application.Internship.IN_POSITIONS_AVAILABLE,
-                        Compensation = application.Internship.IN_COMPENSATION,
-                        IsDeleted = application.Internship.IN_IS_DELETED
-                    },
-                    StudentId = application.Student.US_ID,
-                    Student = new UserDTO
-                    {
-                        Id = student.US_ID,
-                        FirstName = student.US_FIRST_NAME,
-                        LastName = student.US_LAST_NAME,
-                        Email = student.US_EMAIL,
-                        PhoneNumber = student.US_PHONE_NUMBER,
-                        Company = _context.Companies.FirstOrDefault(c => c.CO_ID == student.US_COMPANY_ID),
-                        Role = student.US_ROLE,
-                        City = student.US_CITY,
-                        IsDeleted = student.US_IS_DELETED
-                    },
-                    AppliedDate = application.AP_APPLIED_DATE,
-                    Status = application.AP_STATUS,
-                    CVFilePath = application.AP_CV_FILE_PATH,
-                    IsDeleted = application.AP_IS_DELETED
-                }).ToList();
+                        StudentId = application.AP_STUDENT_ID,
+                        Student = new UserDTO
+                        {
+                            Id = student.US_ID,
+                            FirstName = student.US_FIRST_NAME,
+                            LastName = student.US_LAST_NAME,
+                            Email = student.US_EMAIL,
+                            PhoneNumber = student.US_PHONE_NUMBER,
+                            Company = _context.Companies.FirstOrDefault(c => c.CO_ID == student.US_COMPANY_ID),
+                            Role = student.US_ROLE,
+                            City = student.US_CITY,
+                            IsDeleted = student.US_IS_DELETED
+                        },
+                        AppliedDate = application.AP_APPLIED_DATE,
+                        Status = application.AP_STATUS,
+                        CVFilePath = application.AP_CV_FILE_PATH,
+                        IsDeleted = application.AP_IS_DELETED
+                    });
+                }
 
                 return Ok(applicationDTOs);
             }
@@ -156,52 +164,60 @@ namespace TheInternshipHub.Server.Controllers
 
                 var recruiter = _context.Users.FirstOrDefault(u => u.US_ID == userId);
 
-                var applicationDTOs = applications.Select(application => new ApplicationDTO
+                var applicationDTOs = new List<ApplicationDTO>(); 
+                
+                foreach (var application in applications)
                 {
-                    Id = application.AP_ID,
-                    InternshipId = application.Internship.IN_ID,
-                    Internship = new InternshipDTO
+                    var internship = _context.Internships.FirstOrDefault(i => i.IN_ID == application.AP_INTERNSHIP_ID);
+                    var student = _context.Users.FirstOrDefault(u => u.US_ID == application.AP_STUDENT_ID);
+
+                    applicationDTOs.Add(new ApplicationDTO
                     {
-                        Id = application.Internship.IN_ID,
-                        Title = application.Internship.IN_TITLE,
-                        Description = application.Internship.IN_DESCRIPTION,
-                        Company = application.Internship.Company,
-                        Recruiter = new UserDTO
+                        Id = application.AP_ID,
+                        InternshipId = application.AP_INTERNSHIP_ID,
+                        Internship = new InternshipDTO
                         {
-                            Id = recruiter.US_ID,
-                            FirstName = recruiter.US_FIRST_NAME,
-                            LastName = recruiter.US_LAST_NAME,
-                            Email = recruiter.US_EMAIL,
-                            PhoneNumber = recruiter.US_PHONE_NUMBER,
-                            Company = _context.Companies.FirstOrDefault(c => c.CO_ID == recruiter.US_COMPANY_ID),
-                            Role = recruiter.US_ROLE,
-                            City = recruiter.US_CITY,
-                            IsDeleted = recruiter.US_IS_DELETED
+                            Id = application.AP_INTERNSHIP_ID,
+                            Title = internship.IN_TITLE,
+                            Description = internship.IN_DESCRIPTION,
+                            Company = internship.Company,
+                            Recruiter = new UserDTO
+                            {
+                                Id = recruiter.US_ID,
+                                FirstName = recruiter.US_FIRST_NAME,
+                                LastName = recruiter.US_LAST_NAME,
+                                Email = recruiter.US_EMAIL,
+                                PhoneNumber = recruiter.US_PHONE_NUMBER,
+                                Company = _context.Companies.FirstOrDefault(c => c.CO_ID == recruiter.US_COMPANY_ID),
+                                Role = recruiter.US_ROLE,
+                                City = recruiter.US_CITY,
+                                IsDeleted = recruiter.US_IS_DELETED
+                            },
+                            StartDate = internship.IN_START_DATE,
+                            EndDate = internship.IN_END_DATE,
+                            PositionsAvailable = internship.IN_POSITIONS_AVAILABLE,
+                            Compensation = internship.IN_COMPENSATION,
+                            IsDeleted = internship.IN_IS_DELETED
                         },
-                        StartDate = application.Internship.IN_START_DATE,
-                        EndDate = application.Internship.IN_END_DATE,
-                        PositionsAvailable = application.Internship.IN_POSITIONS_AVAILABLE,
-                        Compensation = application.Internship.IN_COMPENSATION,
-                        IsDeleted = application.Internship.IN_IS_DELETED
-                    },
-                    StudentId = application.Student.US_ID,
-                    Student = new UserDTO
-                    {
-                        Id = application.Student.US_ID,
-                        FirstName = application.Student.US_FIRST_NAME,
-                        LastName = application.Student.US_LAST_NAME,
-                        Email = application.Student.US_EMAIL,
-                        PhoneNumber = application.Student.US_PHONE_NUMBER,
-                        Company = _context.Companies.FirstOrDefault(c => c.CO_ID == application.Student.US_COMPANY_ID),
-                        Role = application.Student.US_ROLE,
-                        City = application.Student.US_CITY,
-                        IsDeleted = application.Student.US_IS_DELETED
-                    },
-                    AppliedDate = application.AP_APPLIED_DATE,
-                    Status = application.AP_STATUS,
-                    CVFilePath = application.AP_CV_FILE_PATH,
-                    IsDeleted = application.AP_IS_DELETED
-                }).ToList();
+                        StudentId = application.AP_STUDENT_ID,
+                        Student = new UserDTO
+                        {
+                            Id = student.US_ID,
+                            FirstName = student.US_FIRST_NAME,
+                            LastName = student.US_LAST_NAME,
+                            Email = student.US_EMAIL,
+                            PhoneNumber = student.US_PHONE_NUMBER,
+                            Company = _context.Companies.FirstOrDefault(c => c.CO_ID == student.US_COMPANY_ID),
+                            Role = student.US_ROLE,
+                            City = student.US_CITY,
+                            IsDeleted = student.US_IS_DELETED
+                        },
+                        AppliedDate = application.AP_APPLIED_DATE,
+                        Status = application.AP_STATUS,
+                        CVFilePath = application.AP_CV_FILE_PATH,
+                        IsDeleted = application.AP_IS_DELETED
+                    });
+                }
 
                 return Ok(applicationDTOs);
             }
