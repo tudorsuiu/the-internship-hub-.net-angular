@@ -12,4 +12,5 @@ export interface IUniversityStudent {
     internship?: IInternship;
     applicationStatus: string;
     applicationCVFilePath: string;
+    applicationUniversityDocsFilePath: string;
 }

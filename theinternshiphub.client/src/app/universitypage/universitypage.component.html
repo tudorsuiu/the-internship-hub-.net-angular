@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">The Internship Hub</a>
         <button
@@ -16,11 +16,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/university">Students</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/universityApplications"
-                        >Documents</a
-                    >
-                </li>
+
                 <li class="nav-item dropdown">
                     <a
                         class="nav-link dropdown-toggle"
@@ -49,6 +45,25 @@
     </div>
 </nav>
 
+<h2 class="text-center mt-5 mb-0">Student internship status</h2>
+
+<div class="d-flex align-items-center m-5 justify-content-center">
+    <input
+        type="text"
+        class="form-control w-25 me-3"
+        placeholder="Search..."
+        (input)="onInputChange($event)" />
+
+    <select
+        class="form-select w-25 me-3"
+        aria-label="Sort"
+        (change)="onSortChange($event)">
+        <option value="">Sort</option>
+        <option value="lastName_asc">Last name: asc</option>
+        <option value="lastName_desc">Last name: desc</option>
+    </select>
+</div>
+
 <div class="d-flex justify-content-center m-5">
     <table class="table table-striped w-75">
         <thead>
@@ -57,11 +72,11 @@
                 <th scope="col">Email</th>
                 <th scope="col">Company</th>
                 <th scope="col">Status</th>
-                <th scope="col"></th>
+                <th scope="col">Documents</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let student of students">
+            <tr *ngFor="let student of filteredStudents">
                 <td>
                     {{ student.studentLastName }} {{ student.studentFirstName }}
                 </td>
@@ -71,7 +86,28 @@
                 <td>{{ student.internship?.company?.cO_NAME }}</td>
                 <td>{{ student.applicationStatus }}</td>
 
-                <td class="text-center"></td>
+                <td
+                    *ngIf="
+                        student.applicationStatus === 'Confirmed' &&
+                        student.applicationUniversityDocsFilePath !== ''
+                    ">
+                    <a
+                        [href]="student.applicationUniversityDocsFilePath"
+                        download="Docs"
+                        class="btn btn-link"
+                        >Download documents</a
+                    >
+                </td>
+
+                <td
+                    *ngIf="
+                        student.applicationStatus === 'Confirmed' &&
+                        student.applicationUniversityDocsFilePath === ''
+                    ">
+                    Waiting for documents
+                </td>
+
+                <td *ngIf="student.applicationStatus !== 'Confirmed'"></td>
             </tr>
         </tbody>
     </table>

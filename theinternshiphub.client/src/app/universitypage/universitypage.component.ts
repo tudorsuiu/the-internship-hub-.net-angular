@@ -7,7 +7,14 @@ import { UserService } from '../services/user/user.service';
 import { IUniversityStudent } from '../dtos/IUniversityStudent';
 import { IInternship } from '../dtos/IInternship';
 import { InternshipService } from '../services/internship/internship.service';
-import { forkJoin } from 'rxjs';
+import {
+    debounceTime,
+    distinctUntilChanged,
+    forkJoin,
+    Observable,
+    Subject,
+    switchMap,
+} from 'rxjs';
 
 @Component({
     selector: 'app-universitypage',
@@ -18,6 +25,9 @@ import { forkJoin } from 'rxjs';
 })
 export class UniversitypageComponent {
     students: IUniversityStudent[] = [];
+
+    filteredStudents: IUniversityStudent[] = [];
+    private searchSubject = new Subject<string>();
 
     constructor(
         private router: Router,
@@ -48,10 +58,86 @@ export class UniversitypageComponent {
                             }
                         )
                 );
+                this.filteredStudents = [...this.students];
             },
             error => {
                 console.error('Error fetching students:', error);
             }
         );
+
+        this.searchSubject
+            .pipe(
+                debounceTime(250),
+                distinctUntilChanged(),
+                switchMap((searchTerm: string) =>
+                    this.filterStudents(searchTerm)
+                )
+            )
+            .subscribe(filtered => {
+                this.filteredStudents = filtered;
+            });
+    }
+
+    searchStudents(searchTerm: string) {
+        this.searchSubject.next(searchTerm);
+    }
+
+    onInputChange(event: Event) {
+        const input = event.target as HTMLInputElement;
+        if (input) {
+            this.searchStudents(input.value);
+        }
+    }
+
+    filterStudents(searchTerm: string) {
+        return new Observable<IUniversityStudent[]>(observer => {
+            const lowerCaseSearchTerm = searchTerm.toLowerCase();
+
+            const filtered = this.students.filter(student => {
+                return Object.values(student).some(value => {
+                    if (typeof value === 'string') {
+                        return value
+                            .toLowerCase()
+                            .includes(lowerCaseSearchTerm);
+                    }
+                    if (typeof value === 'number') {
+                        return value.toString().includes(lowerCaseSearchTerm);
+                    }
+                    return false;
+                });
+            });
+
+            observer.next(filtered);
+            observer.complete();
+        });
+    }
+
+    onSortChange(event: Event) {
+        const selectElement = event.target as HTMLSelectElement;
+        if (selectElement) {
+            this.sortStudents(selectElement.value);
+        }
+    }
+
+    sortStudents(sortOption: string) {
+        if (!sortOption) {
+            this.filteredStudents = [...this.students];
+            return;
+        }
+
+        const [key, order] = sortOption.split('_');
+
+        if (key === 'lastName') {
+            this.filteredStudents = [...this.filteredStudents].sort((a, b) => {
+                const nameA = a.studentLastName.toLowerCase();
+                const nameB = b.studentLastName.toLowerCase();
+
+                if (order === 'asc') {
+                    return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
+                } else {
+                    return nameA > nameB ? -1 : nameA < nameB ? 1 : 0;
+                }
+            });
+        }
     }
 }

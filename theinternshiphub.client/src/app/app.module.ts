@@ -7,10 +7,9 @@ import { AppComponent } from './app.component';
 import { UniversitypageComponent } from './universitypage/universitypage.component';
 import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
 import { RequestInterceptor } from './interceptors/request/request.interceptor';
-import { UniversityApplicationsComponent } from './university-applications/university-applications.component';
 
 @NgModule({
-    declarations: [AppComponent, UniversityApplicationsComponent],
+    declarations: [AppComponent],
     imports: [BrowserModule, HttpClientModule, AppRoutingModule],
     providers: [
         {

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">The Internship Hub</a>
 
@@ -49,6 +49,8 @@
     </div>
 </nav>
 
+<h2 class="text-center mt-5 mb-0">Your applications</h2>
+
 <div class="d-flex justify-content-center m-5">
     <table class="table table-striped w-75">
         <thead>
@@ -76,23 +78,36 @@
                 <td class="text-center">
                     <button
                         *ngIf="application.status === 'Accepted'"
-                        class="btn btn-dark me-2"
+                        class="btn btn-primary me-2"
                         (click)="confirmAcceptance(application)">
                         Confirm
                     </button>
 
                     <button
                         *ngIf="application.status === 'Accepted'"
-                        class="btn btn-dark"
+                        class="btn btn-primary"
                         (click)="declineAcceptance(application)">
                         Refuse
                     </button>
-                    <button
-                        *ngIf="application.status === 'Confirmed'"
-                        class="btn btn-dark"
-                        (click)="uploadDocumentsForUniversity()">
-                        Upload documents
-                    </button>
+                    <div
+                        class="file-upload mt-2"
+                        *ngIf="
+                            application.status === 'Confirmed' &&
+                            application.universityDocsFilePath === ''
+                        ">
+                        <div class="file-upload mb-0 text-center">
+                            <label for="fileInput" class="btn btn-primary w-75"
+                                >Upload documents
+                                <input
+                                    id="fileInput"
+                                    type="file"
+                                    (change)="
+                                        onFileSelected($event, application)
+                                    "
+                                    class="d-none" />
+                            </label>
+                        </div>
+                    </div>
                 </td>
             </tr>
         </tbody>
