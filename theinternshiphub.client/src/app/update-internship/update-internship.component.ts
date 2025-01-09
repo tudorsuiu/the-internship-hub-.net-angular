@@ -56,7 +56,7 @@ export class UpdateInternshipComponent {
     endDate: string = '';
     positionsAvailable: number = 0;
     compensation: number = 0;
-    isDeleted: boolean = false;
+    isDeleted: string = '';
     deadline: string = '';
 
     constructor(
@@ -91,7 +91,7 @@ export class UpdateInternshipComponent {
                         );
                         this.positionsAvailable = response.positionsAvailable;
                         this.compensation = response.compensation;
-                        this.isDeleted = response.isDeleted;
+                        this.isDeleted = String(response.isDeleted);
                         this.deadline = formatDate(
                             new Date(response.deadline.toString().slice(0, 10)),
                             'yyyy-MM-dd',
@@ -143,7 +143,7 @@ export class UpdateInternshipComponent {
             endDate: new Date(this.endDate),
             positionsAvailable: this.positionsAvailable,
             compensation: this.compensation,
-            isDeleted: this.isDeleted,
+            isDeleted: this.isDeleted.toLowerCase() == 'true',
             deadline: new Date(this.deadline),
         };
 

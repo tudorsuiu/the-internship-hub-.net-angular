@@ -53,8 +53,8 @@ export class ApplicationsComponent {
         );
     }
 
-    rejectAcceptance(application: IApplication) {
-        const updatedApplication = { ...application, status: 'Refused' };
+    declineAcceptance(application: IApplication) {
+        const updatedApplication = { ...application, status: 'Declined' };
 
         console.log(updatedApplication);
 
