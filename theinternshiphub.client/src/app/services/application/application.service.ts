@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IApplication } from '../../dtos/IApplication';
 import { endpointAPI } from '../../../config';
+import { ICandidateProfileDTO } from '../../dtos/CandidateProfile/ICandidateProfileDTO';
 
 @Injectable({
     providedIn: 'root',
@@ -31,6 +32,12 @@ export class ApplicationService {
     getApplicationById(applicationId: string): Observable<IApplication> {
         return this.http.get<IApplication>(
             `${endpointAPI}/api/Applications/${applicationId}`
+        );
+    }
+
+    getCandidateProfile(applicationId: string) {
+        return this.http.get<ICandidateProfileDTO>(
+            `${endpointAPI}/api/OpenAI/${applicationId}`
         );
     }
 }

@@ -11,6 +11,7 @@ import {
     switchMap,
 } from 'rxjs';
 import { Router } from '@angular/router';
+import { ICandidateProfileDTO } from '../dtos/CandidateProfile/ICandidateProfileDTO';
 
 @Component({
     selector: 'app-company-applications',
@@ -23,6 +24,48 @@ export class CompanyApplicationsComponent {
     applications: IApplication[] = [];
     filteredApplications: IApplication[] = [];
     private searchSubject = new Subject<string>();
+
+    candidateProfile: ICandidateProfileDTO = {
+        personalInformation: {
+            name: '',
+            location: '',
+            contact: '',
+        },
+        education: [
+            {
+                institution: '',
+                degree: '',
+                graduated: '',
+            },
+        ],
+        professionalExperience: [
+            {
+                company: '',
+                role: '',
+                duration: '',
+                responsibilities: '',
+            },
+        ],
+        technicalSkills: [''],
+        certifications: [''],
+        projects: [
+            {
+                projectName: '',
+                description: '',
+                technologiesUsed: [''],
+            },
+        ],
+        languages: [
+            {
+                name: '',
+                level: '',
+            },
+        ],
+        additionalInformation: {
+            interests: '',
+            volunteer: '',
+        },
+    };
 
     constructor(
         private applicationService: ApplicationService,
@@ -151,5 +194,17 @@ export class CompanyApplicationsComponent {
     logout() {
         this.router.navigate(['/login']);
         localStorage.clear();
+    }
+
+    generateCandidateProfile(applicationId: string) {
+        this.applicationService.getCandidateProfile(applicationId).subscribe(
+            (response: any) => {
+                this.candidateProfile = response;
+                console.log(this.candidateProfile);
+            },
+            (error: any) => {
+                console.log(error.message);
+            }
+        );
     }
 }
