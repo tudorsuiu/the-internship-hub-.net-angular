@@ -11,6 +11,7 @@ import { ApplicationsComponent } from './applications/applications.component';
 import { MyaccountComponent } from './myaccount/myaccount.component';
 import { UpdateInternshipComponent } from './update-internship/update-internship.component';
 import { CompanyApplicationsComponent } from './company-applications/company-applications.component';
+import { UniversityApplicationsComponent } from './university-applications/university-applications.component';
 
 const routes: Routes = [
     { path: '', component: HomepageComponent, pathMatch: 'full' },
@@ -25,6 +26,10 @@ const routes: Routes = [
     { path: 'myaccount', component: MyaccountComponent },
     { path: 'updateInternship/:id', component: UpdateInternshipComponent },
     { path: 'companyApplications', component: CompanyApplicationsComponent },
+    {
+        path: 'universityApplications',
+        component: UniversityApplicationsComponent,
+    },
 ];
 
 @NgModule({
