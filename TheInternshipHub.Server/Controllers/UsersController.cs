@@ -178,7 +178,8 @@ namespace TheInternshipHub.Server.Controllers
                     ApplicationId = mostAdvancedApplication is null ? Guid.Empty : mostAdvancedApplication.AP_ID,
                     InternshipId = mostAdvancedApplication is null ? Guid.Empty : mostAdvancedApplication.AP_INTERNSHIP_ID,
                     ApplicationStatus = mostAdvancedApplication is null ? "" : mostAdvancedApplication.AP_STATUS,
-                    ApplicationCVFilePath = mostAdvancedApplication is null ? "" : mostAdvancedApplication.AP_CV_FILE_PATH
+                    ApplicationCVFilePath = mostAdvancedApplication is null ? "" : mostAdvancedApplication.AP_CV_FILE_PATH,
+                    ApplicationUniversityDocsFilePath = mostAdvancedApplication is null ? "" : mostAdvancedApplication.AP_UNIVERSITY_DOCS_FILE_PATH
                 });
             }
 

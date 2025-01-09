@@ -79,6 +79,7 @@ namespace TheInternshipHub.Server.Controllers
                 AppliedDate = application.AP_APPLIED_DATE,
                 Status = application.AP_STATUS,
                 CVFilePath = application.AP_CV_FILE_PATH,
+                UniversityDocsFilePath = application.AP_UNIVERSITY_DOCS_FILE_PATH,
                 IsDeleted = application.AP_IS_DELETED
             };
 
@@ -150,6 +151,7 @@ namespace TheInternshipHub.Server.Controllers
                         AppliedDate = application.AP_APPLIED_DATE,
                         Status = application.AP_STATUS,
                         CVFilePath = application.AP_CV_FILE_PATH,
+                        UniversityDocsFilePath = application.AP_UNIVERSITY_DOCS_FILE_PATH,
                         IsDeleted = application.AP_IS_DELETED
                     });
                 }
@@ -215,6 +217,7 @@ namespace TheInternshipHub.Server.Controllers
                         AppliedDate = application.AP_APPLIED_DATE,
                         Status = application.AP_STATUS,
                         CVFilePath = application.AP_CV_FILE_PATH,
+                        UniversityDocsFilePath = application.AP_UNIVERSITY_DOCS_FILE_PATH,
                         IsDeleted = application.AP_IS_DELETED
                     });
                 }
@@ -251,6 +254,7 @@ namespace TheInternshipHub.Server.Controllers
                 AP_APPLIED_DATE = request.AppliedDate,
                 AP_STATUS = request.Status,
                 AP_CV_FILE_PATH = request.CVFilePath,
+                AP_UNIVERSITY_DOCS_FILE_PATH = request.UniversityDocsFilePath,
                 AP_IS_DELETED = request.IsDeleted
             };
 
@@ -274,6 +278,7 @@ namespace TheInternshipHub.Server.Controllers
 
             application.AP_STATUS = request.Status;
             application.AP_CV_FILE_PATH = request.CVFilePath;
+            application.AP_UNIVERSITY_DOCS_FILE_PATH = request.UniversityDocsFilePath;
             application.AP_IS_DELETED = request.IsDeleted;
 
             _context.Applications.Update(application);
