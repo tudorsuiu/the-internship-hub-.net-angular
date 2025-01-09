@@ -18,6 +18,8 @@
 
         public string CVFilePath { get; set; }
 
+        public string UniversityDocsFilePath { get; set; }
+
         public bool IsDeleted { get; set; }
     }
 }

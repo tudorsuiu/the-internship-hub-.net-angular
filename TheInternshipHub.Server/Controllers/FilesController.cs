@@ -41,7 +41,7 @@ namespace TheInternshipHub.Server.Controllers
                 await stream.ReadAsync(fileData, 0, (int)file.Length);
             }
 
-            var fileName = $"{Guid.NewGuid()}_resume{extension}";
+            var fileName = $"{Guid.NewGuid()}{extension}";
             var fileUrl = await _azureBlobStorageService.UploadAsync(fileData, fileName);
 
             return Ok(new { url = fileUrl });

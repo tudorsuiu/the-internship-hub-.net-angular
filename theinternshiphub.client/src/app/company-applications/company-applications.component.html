@@ -1,3 +1,298 @@
+<div
+    class="modal"
+    id="candidateProfileModal"
+    tabindex="-1"
+    aria-labelledby="candidateProfileModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="candidateProfileModalLabel">
+                    Candidate Profile
+                </h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div
+                            class="personal-information"
+                            *ngIf="
+                                candidateProfile.personalInformation !== null
+                            ">
+                            <h3 class="">📝 Personal Information</h3>
+                            <p
+                                *ngIf="
+                                    candidateProfile.personalInformation
+                                        .name !== null
+                                "
+                                class="mb-0">
+                                <span class="fw-bold">Name: </span>
+                                {{ candidateProfile.personalInformation.name }}
+                            </p>
+                            <p
+                                *ngIf="
+                                    candidateProfile.personalInformation
+                                        .location !== null
+                                "
+                                class="mb-0">
+                                <span class="fw-bold">Location:</span>
+                                {{
+                                    candidateProfile.personalInformation
+                                        .location
+                                }}
+                            </p>
+                            <p
+                                *ngIf="
+                                    candidateProfile.personalInformation
+                                        .contact !== null
+                                "
+                                class="mb-0">
+                                <span class="fw-bold">Contact:</span>
+                                {{
+                                    candidateProfile.personalInformation.contact
+                                }}
+                            </p>
+                            <hr />
+                        </div>
+                        <div
+                            class="education"
+                            *ngIf="candidateProfile.education !== null">
+                            <h3 class="">📚 Education</h3>
+                            <div
+                                *ngFor="
+                                    let education of candidateProfile.education
+                                ">
+                                <p
+                                    *ngIf="education.degree !== null"
+                                    class="mb-0">
+                                    <span class="fw-bold">Degree:</span>
+                                    {{ education.degree }}
+                                </p>
+                                <p
+                                    *ngIf="
+                                        education.institution !== null &&
+                                        education.degree !== null
+                                    "
+                                    class="mb-0">
+                                    <span class="fw-bold">Institution:</span>
+                                    {{ education.institution }}
+                                </p>
+                                <p
+                                    *ngIf="
+                                        education.graduated !== null &&
+                                        (education.degree !== null ||
+                                            education.institution !== null)
+                                    "
+                                    class="mb-0">
+                                    <span class="fw-bold">Graduated:</span>
+                                    {{ education.graduated }}
+                                </p>
+                                <hr
+                                    *ngIf="
+                                        education.degree !== null ||
+                                        education.institution !== null
+                                    " />
+                            </div>
+                        </div>
+                        <div
+                            class="professional-experience"
+                            *ngIf="
+                                candidateProfile.professionalExperience !== null
+                            ">
+                            <h3 class="">💼 Professional Experience</h3>
+                            <div
+                                *ngFor="
+                                    let professionalExperience of candidateProfile.professionalExperience
+                                ">
+                                <p
+                                    *ngIf="
+                                        professionalExperience.company !== null
+                                    "
+                                    class="mb-0">
+                                    <span class="fw-bold">Company:</span>
+                                    {{ professionalExperience.company }}
+                                </p>
+                                <p
+                                    *ngIf="professionalExperience.role !== null"
+                                    class="mb-0">
+                                    <span class="fw-bold">Role:</span>
+                                    {{ professionalExperience.role }}
+                                </p>
+                                <p
+                                    *ngIf="
+                                        professionalExperience.duration !==
+                                            null &&
+                                        (professionalExperience.company !==
+                                            null ||
+                                            professionalExperience.role !==
+                                                null)
+                                    "
+                                    class="mb-0">
+                                    <span class="fw-bold">Duration:</span>
+                                    {{ professionalExperience.duration }}
+                                </p>
+                                <p
+                                    *ngIf="
+                                        professionalExperience.responsibilities !==
+                                        null
+                                    "
+                                    class="mb-0">
+                                    <span class="fw-bold"
+                                        >Responsabilities:</span
+                                    >
+                                    {{
+                                        professionalExperience.responsibilities
+                                    }}
+                                </p>
+                                <hr
+                                    *ngIf="
+                                        professionalExperience.company !==
+                                            null ||
+                                        professionalExperience.role !== null
+                                    " />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div
+                            class="technical-skills"
+                            *ngIf="candidateProfile.technicalSkills !== null">
+                            <h3 class="">💻 Technical Skills</h3>
+                            <p>
+                                {{
+                                    candidateProfile.technicalSkills.join(', ')
+                                }}
+                            </p>
+                            <hr
+                                *ngIf="
+                                    candidateProfile.technicalSkills !== null
+                                " />
+                        </div>
+                        <div
+                            class="certifications"
+                            *ngIf="candidateProfile.certifications !== null">
+                            <h3 class="">📜 Certifications</h3>
+                            <p>
+                                {{ candidateProfile.certifications.join(', ') }}
+                            </p>
+                            <hr
+                                *ngIf="
+                                    candidateProfile.certifications !== null
+                                " />
+                        </div>
+                        <div
+                            class="projects"
+                            *ngIf="candidateProfile.projects !== null">
+                            <h3 class="">📊 Projects</h3>
+                            <div
+                                *ngFor="
+                                    let project of candidateProfile.projects
+                                ">
+                                <p
+                                    *ngIf="project.projectName !== null"
+                                    class="mb-0">
+                                    <span class="fw-bold">Name:</span>
+                                    {{ project.projectName }}
+                                </p>
+                                <p
+                                    *ngIf="project.description !== null"
+                                    class="mb-0">
+                                    <span class="fw-bold">Description:</span>
+                                    {{ project.description }}
+                                </p>
+                                <p
+                                    *ngIf="
+                                        project.technologiesUsed !== null &&
+                                        (project.projectName !== null ||
+                                            project.description !== null)
+                                    "
+                                    class="mb-0">
+                                    <span class="fw-bold"
+                                        >Technologies Used:</span
+                                    >
+                                    {{ project.technologiesUsed }}
+                                </p>
+                                <hr
+                                    *ngIf="
+                                        project.projectName !== null ||
+                                        project.description !== null
+                                    " />
+                            </div>
+                        </div>
+                        <div
+                            class="languages"
+                            *ngIf="candidateProfile.languages !== null">
+                            <h3 class="">🌍 Languages</h3>
+                            <div
+                                *ngFor="
+                                    let language of candidateProfile.languages
+                                ">
+                                <p *ngIf="language.name !== null" class="mb-0">
+                                    <span class="fw-bold">Name:</span>
+                                    {{ language.name }}
+                                </p>
+                                <p
+                                    *ngIf="
+                                        language.level !== null &&
+                                        language.name !== null
+                                    "
+                                    class="mb-0">
+                                    <span class="fw-bold">Level:</span>
+                                    {{ language.level }}
+                                </p>
+                                <hr *ngIf="language.name !== null" />
+                            </div>
+                        </div>
+                        <div
+                            class="additional-information"
+                            *ngIf="
+                                candidateProfile.additionalInformation !== null
+                            ">
+                            <h3 class="">📌 Additional Information</h3>
+                            <p
+                                *ngIf="
+                                    candidateProfile.additionalInformation
+                                        .interests !== null
+                                "
+                                class="mb-0">
+                                <span class="fw-bold">Interests:</span>
+                                {{
+                                    candidateProfile.additionalInformation
+                                        .interests
+                                }}
+                            </p>
+                            <p
+                                *ngIf="
+                                    candidateProfile.additionalInformation
+                                        .volunteer !== null
+                                "
+                                class="mb-0">
+                                <span class="fw-bold">Volunteer:</span>
+                                {{
+                                    candidateProfile.additionalInformation
+                                        .volunteer
+                                }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand">The Internship Hub</a>
@@ -127,7 +422,16 @@
                         </option>
                     </select>
                 </td>
-                <td><i class="bi bi-robot"></i></td>
+                <td>
+                    <button
+                        class="btn btn-primary"
+                        title="Generate candidate profile (AI)"
+                        (click)="generateCandidateProfile(application.id)"
+                        data-bs-toggle="modal"
+                        data-bs-target="#candidateProfileModal">
+                        <i class="bi bi-robot"></i>
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
