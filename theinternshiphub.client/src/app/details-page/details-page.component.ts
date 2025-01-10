@@ -54,6 +54,7 @@ export class DetailsPageComponent {
         compensation: 0,
         isDeleted: false,
         deadline: new Date(),
+        domain: '',
     };
 
     user: IUser = {

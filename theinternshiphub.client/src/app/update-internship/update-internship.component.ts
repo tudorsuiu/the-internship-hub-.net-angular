@@ -48,6 +48,7 @@ export class UpdateInternshipComponent {
         compensation: 0,
         isDeleted: false,
         deadline: new Date(),
+        domain: '',
     };
 
     title: string = '';
@@ -58,6 +59,7 @@ export class UpdateInternshipComponent {
     compensation: number = 0;
     isDeleted: string = '';
     deadline: string = '';
+    domain: string = '';
 
     constructor(
         private route: ActivatedRoute,
@@ -97,6 +99,7 @@ export class UpdateInternshipComponent {
                             'yyyy-MM-dd',
                             'en-US'
                         );
+                        this.domain = response.domain;
                     },
                     (error: any) => {
                         console.log(error.message);
@@ -145,6 +148,7 @@ export class UpdateInternshipComponent {
             compensation: this.compensation,
             isDeleted: this.isDeleted.toLowerCase() == 'true',
             deadline: new Date(this.deadline),
+            domain: this.domain,
         };
 
         this.internshipService.updateInternship(internship).subscribe(
