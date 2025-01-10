@@ -27,9 +27,9 @@
                 <h2 class="mt-4">{{ internship.title }}</h2>
 
                 <p class="mt-1"><strong>Description</strong></p>
-                <textarea rows="20" class="w-100">{{
-                    internship.description
-                }}</textarea>
+                <div class="w-100" style="max-height: 250px; overflow-y: auto">
+                    {{ internship.description }}
+                </div>
             </div>
             <div class="col-md-6 ml-3">
                 <p class="mb-3">
