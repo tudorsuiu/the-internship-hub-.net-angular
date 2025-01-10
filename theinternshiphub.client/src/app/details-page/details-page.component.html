@@ -63,10 +63,17 @@
                     {{ internship.recruiter.email }}
                 </p>
 
-                <p class="mb-5">
+                <p class="mb-3">
                     <i class="bi bi-calendar"></i>
                     <strong> Deadline for application:</strong>
                     {{ internship.deadline | date : 'yyyy-MM-dd' }}
+                </p>
+
+                <p class="mb-5">
+                    <i class="bi bi-globe"></i>
+
+                    <strong> Domain:</strong>
+                    {{ internship.domain }}
                 </p>
 
                 <div class="file-upload mt-2">

@@ -39,6 +39,7 @@ export class RegisterComponent {
         this.companyService.getUniversities().subscribe(
             (response: ICompany[]) => {
                 this.companies = response;
+                console.log(this.companies);
             },
             (error: any) => {
                 console.log(error.message);

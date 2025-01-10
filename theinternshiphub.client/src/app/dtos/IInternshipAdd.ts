@@ -12,4 +12,5 @@ export interface IInternshipAdd {
     compensation: number | null;
     isDeleted: boolean;
     deadline: Date | null;
+    domain: string;
 }
