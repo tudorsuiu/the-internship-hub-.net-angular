@@ -37,6 +37,7 @@ namespace TheInternshipHub.Server.Controllers
                 Id = internship.IN_ID,
                 Title = internship.IN_TITLE,
                 Description = internship.IN_DESCRIPTION,
+                Domain = internship.IN_DOMAIN,
                 Company = internship.Company,
                 Recruiter = new UserDTO
                 {
@@ -90,6 +91,7 @@ namespace TheInternshipHub.Server.Controllers
                         Id = i.IN_ID,
                         Title = i.IN_TITLE,
                         Description = i.IN_DESCRIPTION,
+                        Domain = i.IN_DOMAIN,
                         Company = i.Company,
                         Recruiter = new UserDTO
                         {
@@ -121,6 +123,7 @@ namespace TheInternshipHub.Server.Controllers
                        Id = i.IN_ID,
                        Title = i.IN_TITLE,
                        Description = i.IN_DESCRIPTION,
+                       Domain = i.IN_DOMAIN,
                        Company = i.Company,
                        Recruiter = new UserDTO
                        {
@@ -151,6 +154,7 @@ namespace TheInternshipHub.Server.Controllers
                        Id = i.IN_ID,
                        Title = i.IN_TITLE,
                        Description = i.IN_DESCRIPTION,
+                       Domain = i.IN_DOMAIN,
                        Company = i.Company,
                        Recruiter = new UserDTO
                        {
@@ -195,6 +199,7 @@ namespace TheInternshipHub.Server.Controllers
                 IN_ID = Guid.NewGuid(),
                 IN_TITLE = request.Title,
                 IN_DESCRIPTION = request.Description,
+                IN_DOMAIN = request.Domain,
                 IN_COMPANY_ID = company.CO_ID,
                 Company = company,
                 IN_RECRUITER_ID = recruiter.US_ID,
@@ -237,6 +242,7 @@ namespace TheInternshipHub.Server.Controllers
 
             internship.IN_TITLE = request.Title;
             internship.IN_DESCRIPTION = request.Description;
+            internship.IN_DOMAIN = request.Domain;
             internship.IN_COMPANY_ID = company.CO_ID;
             internship.Company = company;
             internship.IN_RECRUITER_ID = recruiter.US_ID;

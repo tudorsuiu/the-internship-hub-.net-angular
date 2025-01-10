@@ -43,6 +43,7 @@ namespace TheInternshipHub.Server.Controllers
                     Id = internship.IN_ID,
                     Title = internship.IN_TITLE,
                     Description = internship.IN_DESCRIPTION,
+                    Domain = internship.IN_DOMAIN,
                     Company = internship.Company,
                     Recruiter = new UserDTO
                     {
@@ -116,6 +117,7 @@ namespace TheInternshipHub.Server.Controllers
                             Id = application.AP_INTERNSHIP_ID,
                             Title = internship.IN_TITLE,
                             Description = internship.IN_DESCRIPTION,
+                            Domain = internship.IN_DOMAIN,
                             Company = _context.Companies.FirstOrDefault(c => c.CO_ID == internship.IN_COMPANY_ID),
                             Recruiter = new UserDTO
                             {
@@ -182,6 +184,7 @@ namespace TheInternshipHub.Server.Controllers
                             Id = application.AP_INTERNSHIP_ID,
                             Title = internship.IN_TITLE,
                             Description = internship.IN_DESCRIPTION,
+                            Domain = internship.IN_DOMAIN,
                             Company = _context.Companies.FirstOrDefault(c => c.CO_ID == recruiter.US_COMPANY_ID),
                             Recruiter = new UserDTO
                             {

@@ -10,6 +10,8 @@ namespace TheInternshipHub.Server.Domain.DTOs
 
         public string Description { get; set; }
 
+        public string Domain {  get; set; }
+
         public COMPANY Company { get; set; }
 
         public UserDTO Recruiter { get; set; }

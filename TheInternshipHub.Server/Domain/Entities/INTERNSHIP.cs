@@ -15,6 +15,9 @@ namespace TheInternshipHub.Server.Domain.Entities
         public string IN_DESCRIPTION { get; set; }
 
         [Required]
+        public string IN_DOMAIN { get; set; }
+
+        [Required]
         public Guid IN_COMPANY_ID { get; set; }
 
         [ForeignKey("IN_COMPANY_ID")]
